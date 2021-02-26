@@ -17,7 +17,9 @@ app.use(compression());
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
-app.get("/add-claim", async (req, res) => {
+app.post("/add-claim", async (req, res) => {
+    const {  } = req.body;
+
     const claim = new Claim({
         text: "Everyone should have a Smart-phone",
         parentClaim: false,
@@ -42,9 +44,9 @@ app.get("/add-claim", async (req, res) => {
     });
 
     try {
-        const { rows } = await claim.save();
-        console.log('Rows in add-claim: ', rows);
-        res.json(rows);
+        const result = await claim.save();
+        console.log('Rows in add-claim: ', result);
+        res.json(result);
     } catch (error) {
         console.log("Error ins save claim: ", error);
     }
