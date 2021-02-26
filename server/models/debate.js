@@ -19,11 +19,10 @@ const debatesSchema = new Schema({
         {
             user: String,
             body: String,
-            date: Date(),
         },
     ],
     authorId: Number,
-});
+}, { timestamps: true });
 
 const Claim = mongoose.model("Claim", debatesSchema);
 

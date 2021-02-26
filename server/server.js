@@ -35,8 +35,7 @@ app.get("/add-claim", async (req, res) => {
         comments: [
             {
                 user: "Hans-Peter",
-                body: "I don't thibk so",
-                date: Date(),
+                body: "I don't think so",
             },
         ],
         authorId: 1,
@@ -44,6 +43,7 @@ app.get("/add-claim", async (req, res) => {
 
     try {
         const { rows } = await claim.save();
+        console.log('Rows in add-claim: ', rows);
         res.json(rows);
     } catch (error) {
         console.log("Error ins save claim: ", error);
@@ -52,8 +52,9 @@ app.get("/add-claim", async (req, res) => {
 
 app.get("/all-claims", async (req, res) => {
     try {
-        const { rows } = await Claim.find();
-        res.json(rows);
+        const result = await Claim.find();
+        console.log("Rows in all-claims: ", result);
+        res.json(result);
     } catch (error) {
         console.log("Error in all-claims: ", error);
     }
