@@ -1,7 +1,5 @@
 import ReactDOM from "react-dom";
 
-ReactDOM.render(<HelloWorld />, document.querySelector("main"));
+import MakeClaimComp from "./MakeClaimComp";
 
-function HelloWorld() {
-    return <div>Hello, World!</div>;
-}
+ReactDOM.render(<MakeClaimComp />, document.querySelector("main"));

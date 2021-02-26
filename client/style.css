@@ -1,3 +1,16 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: ghostwhite;
+}
+
+.makeClaimCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    background-color: rgb(168, 168, 230);
 }
