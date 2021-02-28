@@ -14,3 +14,8 @@ body {
     margin-top: 50px;
     background-color: rgb(168, 168, 230);
 }
+
+.logoImgDiv {
+    width: 70px;
+    height: 70px;
+}
