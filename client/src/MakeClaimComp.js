@@ -1,4 +1,3 @@
-import MakeClaimButtonComp from "./makeClaimButtonComp";
 import useStatefulFields from "./hooks/useStatefulFields";
 import useHandleSubmit from "./hooks/useHandleSubmit";
 
@@ -21,8 +20,20 @@ export default function MakeClaimComp() {
                     ></textarea>
                 </div>
                 <button onClick={handleSubmit}>MakeClaim</button>
-                <MakeClaimButtonComp />
             </div>
         </div>
     );
 }
+
+/*
+DELETED THIS COMPONENT SINCE IT ONLY MAKES SENCE WITH TEXTAREA. IT'S SIMPLE LIKE THIS.
+import MakeClaimButtonComp from "./makeClaimButtonComp";
+<MakeClaimButtonComp />
+export default function MakeClaimButtonComp() {
+    return (
+        <div className="makeClaimButtonDiv">
+            <button className="makeClaimButton">Make Claim</button>
+        </div>
+    );
+}
+*/
