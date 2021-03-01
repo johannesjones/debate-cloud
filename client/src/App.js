@@ -9,7 +9,7 @@ export default function App() {
             <div className="appDiv">
                 <div className="headerDiv">
                     <Logo />
-                    <h1>Header Text</h1>
+                    <h1>DebateCloud</h1>
                 </div>
                 <div className="mainBodyDiv">
                     <Route exact path="/" render={() => <MakeClaimComp />} />

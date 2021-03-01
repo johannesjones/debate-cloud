@@ -1,11 +1,23 @@
 import axios from "../Axios";
 
+export async function receiveAllMainClaims() {
+    console.log("Inside receiveAllMainClaims");
+    //we can OPTIONALLY "talk" to the server here...
+    const { data } = await axios.get(`/get-mainClaims`);
+    //we always return an object that is our action
+    console.log("DATA WITHIN receiveAllMainClaims", data);
+    return {
+        type: "RECEIVE_ALL_MAINCLAIMS",
+        payload: data,
+    };
+}
+
 export async function receiveAllSubClaims() {
     console.log("Inside receiveAllSubClaims");
     //we can OPTIONALLY "talk" to the server here...
     const { data } = await axios.get(`/get-subClaims`);
     //we always return an object that is our action
-    console.log("DATA WITHIN receiveWannabeFriends", data);
+    console.log("DATA WITHIN receiveAllSubClaims", data);
     return {
         type: "RECEIVE_ALL_SUBCLAIMS",
         payload: data,
