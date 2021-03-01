@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveAllSubClaims } from "./redux/actions";
 
-import ProClaimButtonComp from "./ProClaimButton";
-import ConClaimButtonComp from "./ConClaimButton";
+/* import ProClaimButtonComp from "./ProClaimButton"; */
+/* import ConClaimButtonComp from "./ConClaimButton"; */
 
 export default function DebateFrame() {
     console.log("Inside DebateFrame");
@@ -39,7 +39,7 @@ export default function DebateFrame() {
                     {/* <ProClaimButtonComp /> */}
                 </div>
                 <div className="conButtonDiv">
-                    <ConClaimButtonComp />
+                    {/* <ConClaimButtonComp /> */}
                 </div>
             </div>
             <div className="allProClaims">
