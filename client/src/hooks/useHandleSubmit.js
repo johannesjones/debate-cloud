@@ -22,6 +22,7 @@ export default function useHandleSubmit(url, values) {
                     try {
                         const { data } = await axios.post(url, values);
                         console.log("DATA inside handleSubmit:", data);
+                        console.log("DATA id", data.id);
                         //alternative version: data.success ? location.replace("/") : setError(true)
                         if (!data.error) {
                             console.log("SERVER SIDE WORKS!!!");

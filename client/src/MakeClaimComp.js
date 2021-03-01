@@ -26,7 +26,7 @@ export default function MakeClaimComp() {
 }
 
 /*
-DELETED THIS COMPONENT SINCE IT ONLY MAKES SENCE WITH TEXTAREA. IT'S SIMPLE LIKE THIS.
+DELETED THIS COMPONENT SINCE IT ONLY MAKES SENCE WITH TEXTAREA. IT'S SIMPLE ENOUGH LIKE THIS.
 import MakeClaimButtonComp from "./makeClaimButtonComp";
 <MakeClaimButtonComp />
 export default function MakeClaimButtonComp() {

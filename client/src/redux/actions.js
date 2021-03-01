@@ -15,7 +15,7 @@ export async function loginStatus(param) {
 export async function receiveAllMainClaims() {
     console.log("Inside receiveAllMainClaims");
     //we can OPTIONALLY "talk" to the server here...
-    const { data } = await axios.get(`/get-mainClaims`);
+    const { data } = await axios.get(`/all-claims`);
     //we always return an object that is our action
     console.log("DATA WITHIN receiveAllMainClaims", data);
     return {
@@ -24,10 +24,10 @@ export async function receiveAllMainClaims() {
     };
 }
 
-export async function receiveAllSubClaims() {
+export async function receiveAllSubClaims(id) {
     console.log("Inside receiveAllSubClaims");
     //we can OPTIONALLY "talk" to the server here...
-    const { data } = await axios.get(`/get-subClaims`);
+    const { data } = await axios.get(`/get-subClaims/${id}`);
     //we always return an object that is our action
     console.log("DATA WITHIN receiveAllSubClaims", data);
     return {

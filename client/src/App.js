@@ -3,12 +3,15 @@ import { useSelector } from "react-redux";
 
 import DebateFrame from "./DebateFrame";
 import MakeClaimComp from "./MakeClaimComp";
+import AllMainClaimsComp from "./AllMainClaimsComp";
+
 import Logo from "./Logo";
 import Registration from "./Registration";
 import Login from "./Login";
 
 export default function App() {
     const showModal = useSelector((state) => state.loginStatus);
+
     /*
     useEffect(() => {
         effect;
@@ -30,9 +33,17 @@ export default function App() {
                     <h1>DebateCloud</h1>
                 </div>
                 <div className="mainBodyDiv">
-                    <Route exact path="/" render={() => <MakeClaimComp />} />
                     <Route
-                        path="/debate/:id"
+                        exact
+                        path="/"
+                        render={() => (
+                            <div>
+                                <MakeClaimComp /> <AllMainClaimsComp />
+                            </div>
+                        )}
+                    />
+                    <Route
+                        path="/debate:id"
                         /* path="/debate" */
                         render={() => <DebateFrame />}
                     />

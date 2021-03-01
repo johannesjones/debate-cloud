@@ -166,7 +166,7 @@ app.get("/all-claims", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: { $exists: false } });
         console.log("Rows in all-claims: ", result);
-        res.json({ success: true, data: result });
+        res.json(result);
     } catch (error) {
         console.log("Error in all-claims: ", error);
     }
