@@ -82,20 +82,18 @@ app.post("/login", async (req, res) => {
                 console.log("err in password");
                 res.json({ success: false });
             }
-
         } catch (error) {
-            console.log('Error in find User by Email: ', error);
+            console.log("Error in find User by Email: ", error);
         }
     }
 });
 
 app.post("/add-claim", async (req, res) => {
-    const { text, pro } = req.body;
+    const { text } = req.body;
     const { userId } = req.session.userId;
 
     const claim = new Claim({
         text: text,
-        pro: pro,
         authorId: userId,
     });
 
@@ -108,12 +106,12 @@ app.post("/add-claim", async (req, res) => {
     }
 });
 
-app.get('/delete-claim/:id', async (req, res) => {
+app.get("/delete-claim/:id", async (req, res) => {
     try {
         const result = await Claim.findOneAndRemove({ _id: req.params.id });
         res.json({ success: true, data: result });
     } catch (error) {
-        console.log('Error in removing Claim: ', error);
+        console.log("Error in removing Claim: ", error);
     }
 });
 
@@ -138,7 +136,7 @@ app.post("/add-subClaim/:id", async (req, res) => {
     }
 });
 
-app.post('/add-comment/:id', async (req, res) => {
+app.post("/add-comment/:id", async (req, res) => {
     const { id } = req.params;
     const { text } = req.body;
     const { userId } = req.session.userId;
@@ -146,11 +144,12 @@ app.post('/add-comment/:id', async (req, res) => {
     try {
         const result = await Claim.findOneAndUpdate(
             { _id: id },
-            { $set: { comments: [{ body: text, authorId: userId }] }}, { upsert: true }
+            { $set: { comments: [{ body: text, authorId: userId }] } },
+            { upsert: true }
         );
-        res.json({ success: true, data: result});
+        res.json({ success: true, data: result });
     } catch (error) {
-        console.log('Error in updating Claim with adding comment: ', error);
+        console.log("Error in updating Claim with adding comment: ", error);
     }
 });
 
@@ -191,7 +190,7 @@ app.get("/claim/:id", async (req, res) => {
     }
 });
 
-app.get('/session-status', async (req, res) => {
+app.get("/session-status", async (req, res) => {
     if (req.session.userId) {
         res.json({ userloggedIn: true });
     } else {

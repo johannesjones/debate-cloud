@@ -3,7 +3,7 @@ import useHandleSubmit from "./hooks/useHandleSubmit";
 
 export default function MakeClaimComp() {
     const [values, handleChange] = useStatefulFields();
-    const [error, handleSubmit] = useHandleSubmit(values);
+    const [error, handleSubmit] = useHandleSubmit("/add-claim", values);
 
     return (
         <div className="makeClaimDiv">
@@ -13,7 +13,7 @@ export default function MakeClaimComp() {
                     {error && <p>{error}</p>}
                     <textarea
                         onChange={handleChange}
-                        name="claimText"
+                        name="text"
                         placeholder="Type your claim here..."
                         cols="30"
                         rows="10"

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const debatesSchema = new Schema(
     {
         text: String,
-        pro: Boolean,
         authorId: Number,
     },
     { timestamps: true }

@@ -20,7 +20,7 @@ export default function useAuthSubmit(url, values) {
                 console.log("DATA inside useAuthSubmit:", data);
                 //alternative version: data.success ? location.replace("/") : setError(true)
                 if (!data.error) {
-                    dispatch(loginStatus(true));
+                    dispatch(loginStatus(false));
                 } else {
                     setError({
                         error: data.error,

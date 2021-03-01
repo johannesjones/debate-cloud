@@ -8,7 +8,7 @@ import Registration from "./Registration";
 import Login from "./Login";
 
 export default function App() {
-    const loggedIn = useSelector((state) => state.loginStatus);
+    const showModal = useSelector((state) => state.loginStatus);
     /*
     useEffect(() => {
         effect;
@@ -32,14 +32,14 @@ export default function App() {
                 <div className="mainBodyDiv">
                     <Route exact path="/" render={() => <MakeClaimComp />} />
                     <Route
-                        /* path="/debate/:claimId" */
-                        path="/debate"
+                        path="/debate/:id"
+                        /* path="/debate" */
                         render={() => <DebateFrame />}
                     />
                 </div>
                 <div className="authDiv">
-                    {!loggedIn && <Registration />}
-                    {loggedIn && <Login />}
+                    {showModal && <Registration />}
+                    {showModal && <Login />}
                 </div>
             </div>
         </BrowserRouter>

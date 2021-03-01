@@ -5,11 +5,11 @@ import { receiveAllSubClaims } from "./redux/actions";
 /* import ProClaimButtonComp from "./ProClaimButton"; */
 /* import ConClaimButtonComp from "./ConClaimButton"; */
 
-var proSubClaims = [];
-var conSubClaims = [];
-
 export default function DebateFrame() {
     console.log("Inside DebateFrame");
+
+    var proSubClaims = [];
+    var conSubClaims = [];
 
     const dispatch = useDispatch();
     /*     const proSubClaims = useSelector(
