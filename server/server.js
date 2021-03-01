@@ -44,23 +44,13 @@ app.use(function (req, res, next) {
 app.use(express.json());
 
 app.post("/add-claim", async (req, res) => {
-    const { text, pro, userName, comment } = req.body;
+    const { text, pro, userName, comment, parentClaimId } = req.body;
     const { userId } = req.session.userId;
 
     const claim = new Claim({
         text: text,
-        parentClaimId: false,
+        parentClaimId: parentClaimId,
         pro: pro,
-        totalRatings: 0,
-        countRatings: [
-            {
-                countOnes: 0,
-                countTwos: 0,
-                countThrees: 0,
-                countFours: 0,
-            },
-        ],
-        averageRating: 0,
         comments: [
             {
                 user: userName,
@@ -86,6 +76,17 @@ app.get("/all-claims", async (req, res) => {
         res.json(result);
     } catch (error) {
         console.log("Error in all-claims: ", error);
+    }
+});
+
+app.get('/get-subClaims/:id', async (req, res) => {
+    const { parentClaimId: id } = req.params;
+
+    try {
+        const result = await Claim.find({ parentClaimId: id });
+        res.json(result);
+    } catch (error) {
+        console.log('Error in get-subClaims: ', error);
     }
 });
 
