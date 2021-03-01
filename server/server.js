@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Claim = require("./models/debate");
+const User = require("./models/user");
 // connect to mongodb
 const dbURI =
     "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
@@ -43,6 +44,23 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 
+app.post("/registration", async (req, res) => {
+    const { first, last, email, password } = req.body;
+    const user = new User({
+        first: first,
+        last: last,
+        email: email,
+        password: password,
+    });
+    try {
+        const result = await user.save();
+        console.log("User saved: ", result);
+        res.json(result);
+    } catch (error) {
+        console.log("Error in registration: ", error);
+    }
+});
+
 app.post("/add-claim", async (req, res) => {
     const { text, pro, userName, comment, parentClaimId } = req.body;
     const { userId } = req.session.userId;
@@ -79,14 +97,14 @@ app.get("/all-claims", async (req, res) => {
     }
 });
 
-app.get('/get-subClaims/:id', async (req, res) => {
+app.get("/get-subClaims/:id", async (req, res) => {
     const { parentClaimId: id } = req.params;
 
     try {
         const result = await Claim.find({ parentClaimId: id });
         res.json(result);
     } catch (error) {
-        console.log('Error in get-subClaims: ', error);
+        console.log("Error in get-subClaims: ", error);
     }
 });
 
