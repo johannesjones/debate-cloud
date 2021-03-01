@@ -49,7 +49,7 @@ app.post("/add-claim", async (req, res) => {
 
     const claim = new Claim({
         text: text,
-        parentClaim: false,
+        parentClaimId: false,
         pro: pro,
         totalRatings: 0,
         countRatings: [
