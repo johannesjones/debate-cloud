@@ -46,12 +46,14 @@ app.use(express.json());
 
 app.post("/registration", async (req, res) => {
     const { first, last, email, password } = req.body;
+
     const user = new User({
         first: first,
         last: last,
         email: email,
         password: password,
     });
+
     try {
         const result = await user.save();
         console.log("User saved: ", result);
