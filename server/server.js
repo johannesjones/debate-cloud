@@ -7,7 +7,11 @@ const dbURI =
     "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
 mongoose
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(process.env.PORT || 3001, () => console.log('Debate cloud listening...')))
+    .then(() =>
+        app.listen(process.env.PORT || 3001, () =>
+            console.log("Debate cloud listening...")
+        )
+    )
     .catch((err) => console.log("Err in db-connection: ", err));
 
 const compression = require("compression");
@@ -68,7 +72,7 @@ app.post("/add-claim", async (req, res) => {
 
     try {
         const result = await claim.save();
-        console.log('Rows in add-claim: ', result);
+        console.log("results in add-claim: ", result);
         res.json(result);
     } catch (error) {
         console.log("Error ins save claim: ", error);
@@ -85,14 +89,14 @@ app.get("/all-claims", async (req, res) => {
     }
 });
 
-app.get('/claim', async (req, res) => {
+app.get("/claim", async (req, res) => {
     const { claimId } = req.body;
 
     try {
         const result = await Claim.findById(claimId);
         res.json(result);
     } catch (error) {
-        console.log('Error in claim: ', error);
+        console.log("Error in claim: ", error);
     }
 });
 
