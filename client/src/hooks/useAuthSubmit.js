@@ -16,13 +16,13 @@ export default function useAuthSubmit(url, values) {
                 const { data } = await axios.post(url, values);
                 console.log("DATA inside Login:", data);
                 //alternative version: data.success ? location.replace("/") : setError(true)
-                if (!data.error) {
+                /*                 if (!data.error) {
                     location.replace("/");
                 } else {
                     setError({
                         error: data.error,
                     });
-                }
+                } */
             } catch (err) {
                 console.log("err in Login: ", err);
                 this.setState({

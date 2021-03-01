@@ -5,11 +5,14 @@ import { receiveAllSubClaims } from "./redux/actions";
 /* import ProClaimButtonComp from "./ProClaimButton"; */
 /* import ConClaimButtonComp from "./ConClaimButton"; */
 
+var proSubClaims = [];
+var conSubClaims = [];
+
 export default function DebateFrame() {
     console.log("Inside DebateFrame");
 
     const dispatch = useDispatch();
-    const proSubClaims = useSelector(
+    /*     const proSubClaims = useSelector(
         (state) =>
             state.allSubClaims &&
             state.allSubClaims.filter((allSubClaims) => allSubClaims.pro)
@@ -18,7 +21,7 @@ export default function DebateFrame() {
         (state) =>
             state.allSubClaims &&
             state.allSubClaims.filter((allSubClaims) => !allSubClaims.pro)
-    );
+    ); */
 
     useEffect(() => {
         console.log("Inside DebateFrame useEffect");
