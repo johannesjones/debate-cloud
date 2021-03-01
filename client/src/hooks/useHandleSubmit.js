@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "../Axios";
+import { loginStatus } from "../redux/actions";
 
 export default function useHandleSubmit(values) {
+    const dispatch = useDispatch();
     const [error, setError] = useState(false);
     //error was also 'false' in setState constructor function
 
@@ -13,24 +16,33 @@ export default function useHandleSubmit(values) {
             setError(true);
         } else {
             try {
-                const { data } = await axios.post(values);
-                console.log("DATA inside handleSubmit:", data);
-                //alternative version: data.success ? location.replace("/") : setError(true)
-                if (!data.error) {
-                    console.log("SERVER SIDE WORKS!!!");
-                    location.replace("/debabte/claim");
+                const result = await axios.get("/session-status");
+                if (result) {
+                    try {
+                        const { data } = await axios.post(values);
+                        console.log("DATA inside handleSubmit:", data);
+                        //alternative version: data.success ? location.replace("/") : setError(true)
+                        if (!data.error) {
+                            console.log("SERVER SIDE WORKS!!!");
+                            location.replace("/debabte/claim");
+                        } else {
+                            setError({
+                                error: data.error,
+                            });
+                            console.log("SOMETHING WRONG ON SERVER SIDE!!!");
+                        }
+                    } catch (err) {
+                        console.log("err in Login: ", err);
+                        this.setState({
+                            error:
+                                "Either your email is already registered or your password is wrong",
+                        });
+                    }
                 } else {
-                    setError({
-                        error: data.error,
-                    });
-                    console.log("SOMETHING WRONG ON SERVER SIDE!!!");
+                    dispatch(loginStatus(false));
                 }
-            } catch (err) {
-                console.log("err in Login: ", err);
-                this.setState({
-                    error:
-                        "Either your email is already registered or your password is wrong",
-                });
+            } catch (error) {
+                console.log("ERROR IN useHandleSubmit");
             }
         }
     };
