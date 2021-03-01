@@ -5,9 +5,8 @@ const usersSchema = new Schema(
     {
         first: String,
         last: String,
-        email: String,
+        email: { type: String, required: true, unique: true },
         password: Number,
-        image: String
     },
     { timestamps: true }
 );
