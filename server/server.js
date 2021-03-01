@@ -165,7 +165,7 @@ app.get("/delete-comment/:id", async (req, res) => {
 
 app.get("/all-claims", async (req, res) => {
     try {
-        const result = await Claim.find();
+        const result = await Claim.find({ parentClaimId: { $exists: false } });
         console.log("Rows in all-claims: ", result);
         res.json({ success: true, data: result });
     } catch (error) {
