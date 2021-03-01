@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginStatus } from "../redux/actions";
 import axios from "../Axios";
 
 export default function useAuthSubmit(url, values) {
+    const dispatch = useDispatch();
     const [error, setError] = useState(false);
     //error was also 'false' in setState constructor function
 
@@ -14,15 +17,15 @@ export default function useAuthSubmit(url, values) {
         } else {
             try {
                 const { data } = await axios.post(url, values);
-                console.log("DATA inside Login:", data);
+                console.log("DATA inside useAuthSubmit:", data);
                 //alternative version: data.success ? location.replace("/") : setError(true)
-                /*                 if (!data.error) {
-                    location.replace("/");
+                if (!data.error) {
+                    dispatch(loginStatus(true));
                 } else {
                     setError({
                         error: data.error,
                     });
-                } */
+                }
             } catch (err) {
                 console.log("err in Login: ", err);
                 this.setState({

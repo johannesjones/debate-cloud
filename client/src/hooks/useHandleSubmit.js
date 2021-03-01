@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "../Axios";
 import { loginStatus } from "../redux/actions";
+import axios from "../Axios";
 
 export default function useHandleSubmit(values) {
     const dispatch = useDispatch();
@@ -16,8 +16,9 @@ export default function useHandleSubmit(values) {
             setError(true);
         } else {
             try {
-                const result = await axios.get("/session-status");
-                if (result) {
+                const { data } = await axios.get("/session-status");
+                console.log("RESULT: ", data.userloggedIn);
+                if (data.userloggedIn) {
                     try {
                         const { data } = await axios.post(values);
                         console.log("DATA inside handleSubmit:", data);

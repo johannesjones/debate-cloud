@@ -8,9 +8,8 @@ import Registration from "./Registration";
 import Login from "./Login";
 
 export default function App() {
-    const loggedIn = useSelector((state) => state.loggedIn);
-    /* useSelector (wie bei wannabeFriends)
-    
+    const loggedIn = useSelector((state) => state.loginStatus);
+    /*
     useEffect(() => {
         effect;
         //dispatch getUserInfo
@@ -40,7 +39,7 @@ export default function App() {
                 </div>
                 <div className="authDiv">
                     {!loggedIn && <Registration />}
-                    {!loggedIn && <Login />}
+                    {loggedIn && <Login />}
                 </div>
             </div>
         </BrowserRouter>

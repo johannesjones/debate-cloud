@@ -7,7 +7,7 @@ export async function loginStatus(param) {
     //we always return an object that is our action
     //console.log("DATA WITHIN loginStatus", data);
     return {
-        type: "FALSIFY_LOGIN_STATUS",
+        type: "CHANGE_LOGIN_STATUS",
         payload: param,
     };
 }
