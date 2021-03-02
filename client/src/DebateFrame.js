@@ -1,9 +1,9 @@
 /* eslint-disable indent */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveAllSubClaims, receiveAllMainClaims } from "./redux/actions";
 import { Link } from "react-router-dom";
-/* import CommentModal from "/CommendModal"; */
+import CommentModal from "./CommentModal";
 
 import ProClaimButtonComp from "./ProClaimButton";
 /* import ConClaimButtonComp from "./ConClaimButton"; */
@@ -12,7 +12,7 @@ export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
     //console.log("DEBATE FRAME props", props.match.params.id);
 
-    /* const [showCommentModal, setshowCommentModal] = useState(false); */
+    const [showCommentModal, setshowCommentModal] = useState(false);
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
@@ -73,14 +73,14 @@ export default function DebateFrame(props) {
                             <div key={index}>
                                 <Link to={`/debate/${elem._id}`}>
                                     {elem.text}
-                                    {/*                                     <button
+                                    <button
                                         onClick={() =>
                                             setshowCommentModal(true)
                                         }
                                     >
                                         Comment
-                                    </button> */}
-                                    {/* {showCommentModal && <CommentModal />} */}
+                                    </button>
+                                    {showCommentModal && <CommentModal />}
                                 </Link>
                             </div>
                         );
