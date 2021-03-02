@@ -1,12 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-require('dotenv/config');
 const Claim = require("./models/debate");
 const User = require("./models/user");
 // connect to mongodb
-const dbURI =
-    process.env.DB_CONNECTION;
+const dbURI = 'mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority';
 mongoose
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>
@@ -175,7 +173,7 @@ app.get("/all-claims", async (req, res) => {
 
 app.get("/get-subClaims/:id", async (req, res) => {
     try {
-        const result = await Claim.findAll({ parentClaimId: req.params.id });
+        const result = await Claim.find({ parentClaimId: req.params.id });
         res.json({ success: true, data: result });
     } catch (error) {
         console.log("Error in get-subClaims: ", error);
