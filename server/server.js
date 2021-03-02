@@ -95,7 +95,7 @@ app.post("/add-claim", async (req, res) => {
     const { id, type } = req.body;
     const { userId } = req.session.userId;
 
-    if (id) {
+    if (id && type) {
         const claim = new Claim({
             parentClaimId: id,
             type: type,
@@ -130,27 +130,6 @@ app.get("/delete-claim/:id", async (req, res) => {
         res.json({ success: true, data: result });
     } catch (error) {
         console.log("Error in removing Claim: ", error);
-    }
-});
-
-app.post("/add-subClaim/:id", async (req, res) => {
-    const { id } = req.params;
-    const { text, pro } = req.body;
-    const { userId } = req.session.userId;
-
-    const claim = new Claim({
-        parentClaimId: id,
-        text: text,
-        pro: pro,
-        authorId: userId,
-    });
-
-    try {
-        const result = await claim.save();
-        console.log("results in add-claim: ", result);
-        res.json(result);
-    } catch (error) {
-        console.log("Error ins save claim: ", error);
     }
 });
 
@@ -193,6 +172,7 @@ app.get("/all-mainClaims", async (req, res) => {
 app.get("/get-subClaims/:id", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: req.params.id });
+        console.log('Result get-subClaims: ', result);
         res.json(result);
     } catch (error) {
         console.log("Error in get-subClaims: ", error);
@@ -202,6 +182,7 @@ app.get("/get-subClaims/:id", async (req, res) => {
 app.get("/claim/:id", async (req, res) => {
     try {
         const result = await Claim.findById({ _id: req.params.id });
+        console.log('Result in clain by id: ', result);
         res.json(result);
     } catch (error) {
         console.log("Error in claim: ", error);
@@ -218,9 +199,30 @@ app.get("/session-status", async (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session = null;
-    res.redirect("/welcome");
+    res.redirect("/");
 });
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
+
+// app.post("/add-subClaim/:id", async (req, res) => {
+//     const { id } = req.params;
+//     const { text, pro } = req.body;
+//     const { userId } = req.session.userId;
+
+//     const claim = new Claim({
+//         parentClaimId: id,
+//         text: text,
+//         pro: pro,
+//         authorId: userId,
+//     });
+
+//     try {
+//         const result = await claim.save();
+//         console.log("results in add-claim: ", result);
+//         res.json(result);
+//     } catch (error) {
+//         console.log("Error ins save claim: ", error);
+//     }
+// });
