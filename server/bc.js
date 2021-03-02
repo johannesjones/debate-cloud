@@ -8,6 +8,3 @@ compare = promisify(compare);
 
 exports.compare = compare;
 exports.hash = (plainTextPw) => genSalt().then((salt) => hash(plainTextPw, salt));
-
-
-

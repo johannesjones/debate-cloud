@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+require('dotenv/config');
 const Claim = require("./models/debate");
 const User = require("./models/user");
 // connect to mongodb
 const dbURI =
-    "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
+    process.env.DB_CONNECTION;
 mongoose
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>
@@ -196,6 +197,11 @@ app.get("/session-status", async (req, res) => {
     } else {
         res.json({ userloggedIn: false });
     }
+});
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
 });
 
 app.get("*", function (req, res) {
