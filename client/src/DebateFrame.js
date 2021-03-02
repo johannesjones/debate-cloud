@@ -2,6 +2,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveAllSubClaims, receiveAllMainClaims } from "./redux/actions";
+import { Link } from "react-router-dom";
+/* import CommentModal from "/CommendModal"; */
 
 import ProClaimButtonComp from "./ProClaimButton";
 /* import ConClaimButtonComp from "./ConClaimButton"; */
@@ -9,6 +11,8 @@ import ProClaimButtonComp from "./ProClaimButton";
 export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
     //console.log("DEBATE FRAME props", props.match.params.id);
+
+    /* const [showCommentModal, setshowCommentModal] = useState(false); */
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
@@ -67,7 +71,17 @@ export default function DebateFrame(props) {
                     proSubClaims.map((elem, index) => {
                         return (
                             <div key={index}>
-                                <p>{elem.text}</p>
+                                <Link to={`/debate/${elem._id}`}>
+                                    {elem.text}
+                                    {/*                                     <button
+                                        onClick={() =>
+                                            setshowCommentModal(true)
+                                        }
+                                    >
+                                        Comment
+                                    </button> */}
+                                    {/* {showCommentModal && <CommentModal />} */}
+                                </Link>
                             </div>
                         );
                     })}
