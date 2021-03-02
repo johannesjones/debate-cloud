@@ -1,15 +1,22 @@
 const express = require("express");
 const app = express();
+
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+
 const mongoose = require("mongoose");
-const Claim = require("./models/debate");
 const User = require("./models/user");
+const Claim = require("./models/debate");
 // connect to mongodb
 const dbURI =
     "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
 mongoose
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>
-        app.listen(process.env.PORT || 3001, () =>
+        server.listen(process.env.PORT || 3001, () =>
             console.log("Debate cloud listening...")
         )
     )
@@ -205,6 +212,58 @@ app.get("/logout", (req, res) => {
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+});
+
+io.on("connection", async (socket) => {
+    // socket obj that is passed to callback represents network connection
+    // b/w client server
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    const userId = socket.request.session.userId;
+
+    console.log(`socket with id ${socket.id} is now connected`);
+    console.log(`socket UserId: ${userId}`);
+
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+
+    // try {
+    //     const result = await Comment.find({ parentClaimId: id });
+    //     console.log("Rows: ", rows);
+    //     socket.emit("mostRecentMsgs", result.reverse());
+    // } catch (error) {
+    //     console.log("ERR: ", error);
+    // }
+
+    socket.on("sendComment", async (data) => {
+        console.log("Data in sendComment: ", data);
+        const { commentText, commentId } = data;
+
+        try {
+            if (commentText) {
+                const result = await Claim.findOneAndUpdate(
+                    { _id: commentId },
+                    {
+                        $set: {
+                            comments: [
+                                { commentText: commentText, authorId: userId },
+                            ],
+                        },
+                    },
+                    { upsert: true }
+                );
+                console.log("Result: ", result);
+                //SHOULD WE EMIT SOMETHING HERE? SO WE CAN AUTOMATICALLY SEE THE COMMENT WE HAVE SENT
+                // const comment = {
+                // };
+                // io.emit("cha", msg);
+            }
+        } catch (error) {
+            console.log("Err in addMsg: ", error);
+        }
+    });
 });
 
 // app.post("/add-subClaim/:id", async (req, res) => {

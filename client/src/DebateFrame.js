@@ -12,7 +12,8 @@ export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
     //console.log("DEBATE FRAME props", props.match.params.id);
 
-    const [showCommentModal, setshowCommentModal] = useState(false);
+    const [showProCommentModal, setshowProCommentModal] = useState(false);
+    const [showConCommentModal, setshowConCommentModal] = useState(false);
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
@@ -73,22 +74,22 @@ export default function DebateFrame(props) {
                             <div key={elem._id}>
                                 <Link to={`/debate/${elem._id}`}>
                                     {elem.text}
-                                    <button
-                                        onClick={() =>
-                                            setshowCommentModal(true)
-                                        }
-                                    >
-                                        Comment
-                                    </button>
-                                    <button
-                                        onClick={() =>
-                                            setshowCommentModal(false)
-                                        }
-                                    >
-                                        Close Comments
-                                    </button>
-                                    {showCommentModal && <CommentModal />}
                                 </Link>
+                                <button
+                                    onClick={() => setshowProCommentModal(true)}
+                                >
+                                    Comment
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setshowProCommentModal(false)
+                                    }
+                                >
+                                    X
+                                </button>
+                                {showProCommentModal && (
+                                    <CommentModal id={elem._id} />
+                                )}
                             </div>
                         );
                     })}
@@ -101,22 +102,22 @@ export default function DebateFrame(props) {
                             <div key={elem._id}>
                                 <Link to={`/debate/${elem._id}`}>
                                     {elem.text}
-                                    <button
-                                        onClick={() =>
-                                            setshowCommentModal(true)
-                                        }
-                                    >
-                                        Comment
-                                    </button>
-                                    <button
-                                        onClick={() =>
-                                            setshowCommentModal(false)
-                                        }
-                                    >
-                                        Close Comments
-                                    </button>
-                                    {showCommentModal && <CommentModal />}
                                 </Link>
+                                <button
+                                    onClick={() => setshowConCommentModal(true)}
+                                >
+                                    Comment
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setshowConCommentModal(false)
+                                    }
+                                >
+                                    X
+                                </button>
+                                {showConCommentModal && (
+                                    <CommentModal id={elem._id} />
+                                )}
                             </div>
                         );
                     })}

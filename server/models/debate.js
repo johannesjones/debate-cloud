@@ -9,7 +9,7 @@ const debatesSchema = new Schema(
         authorId: String,
         comments: [
             {
-                body: String,
+                commentText: String,
                 authorId: String,
             },
         ],

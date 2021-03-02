@@ -12,7 +12,7 @@ export default function MakeClaimComp(props) {
         props.id,
         props.type
     );
-    console.log("VALUES", values);
+    //console.log("VALUES", values);
 
     return (
         <div className="makeClaimDiv">
