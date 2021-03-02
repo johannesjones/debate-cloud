@@ -80,7 +80,9 @@ export default function DebateFrame(props) {
                                     >
                                         Comment
                                     </button>
-                                    {showCommentModal && <CommentModal />}
+                                    {showCommentModal && (
+                                        <CommentModal id={elem._id} />
+                                    )}
                                 </Link>
                             </div>
                         );

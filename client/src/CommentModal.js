@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { socket } from "./socket";
 
-export default function Chat() {
+export default function CommentModal({ id }) {
+    console.log('Inside CommentModal, Id subClaim: ', id);
     const ref = useRef();
 
     const [comment, setComment] = useState("");
@@ -15,7 +16,7 @@ export default function Chat() {
 
     const sendComment = (e) => {
         e.preventDefault();
-        socket.emit("comment", comment);
+        socket.emit("comment", { commentText: comment, commentId: id });
         setComment("");
     };
 
