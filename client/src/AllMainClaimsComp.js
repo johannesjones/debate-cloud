@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveAllMainClaims } from "./redux/actions";
+import { Link } from "react-router-dom";
 
 export default function AllMainClaimsComp() {
     const dispatch = useDispatch();
@@ -24,7 +25,9 @@ export default function AllMainClaimsComp() {
                         allMainClaims.map((elem, index) => {
                             return (
                                 <div className="mainClaimCard" key={index}>
-                                    <a href="/debate/${elem}">{elem.text}</a>
+                                    <Link to={`/debate/${elem._id}`}>
+                                        {elem.text}
+                                    </Link>
                                 </div>
                             );
                         })}

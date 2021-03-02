@@ -43,9 +43,9 @@ export default function App() {
                         )}
                     />
                     <Route
-                        path="/debate:id"
+                        path="/debate/:id"
                         /* path="/debate" */
-                        render={() => <DebateFrame />}
+                        render={(props) => <DebateFrame match={props.match} />}
                     />
                 </div>
                 <div className="authDiv">
