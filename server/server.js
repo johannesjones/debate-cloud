@@ -88,10 +88,12 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/add-claim", async (req, res) => {
-    const { text } = req.body;
+    const { text, id, pro } = req.body;
     const { userId } = req.session.userId;
 
     const claim = new Claim({
+        parentClaimId: id,
+        pro: pro,
         text: text,
         authorId: userId,
     });
@@ -161,7 +163,7 @@ app.get("/delete-comment/:id", async (req, res) => {
     }
 });
 
-app.get("/all-claims", async (req, res) => {
+app.get("/all-mainClaims", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: { $exists: false } });
         console.log("Rows in all-claims: ", result);
@@ -174,7 +176,7 @@ app.get("/all-claims", async (req, res) => {
 app.get("/get-subClaims/:id", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: req.params.id });
-        res.json({ success: true, data: result });
+        res.json(result);
     } catch (error) {
         console.log("Error in get-subClaims: ", error);
     }
@@ -183,7 +185,7 @@ app.get("/get-subClaims/:id", async (req, res) => {
 app.get("/claim/:id", async (req, res) => {
     try {
         const result = await Claim.findById({ _id: req.params.id });
-        res.json({ success: true, data: result });
+        res.json(result);
     } catch (error) {
         console.log("Error in claim: ", error);
     }
