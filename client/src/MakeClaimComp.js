@@ -28,7 +28,7 @@ export default function MakeClaimComp(props) {
                         rows="10"
                     ></textarea>
                 </div>
-                <button onClick={handleSubmit}>MakeClaim</button>
+                <button onClick={handleSubmit}>Send Claim</button>
             </div>
         </div>
     );

@@ -23,6 +23,12 @@ export default function ProClaimButtonComp({ id }) {
             >
                 Make Pro Claim
             </button>
+            <button
+                onClick={() => setShowMakeClaim(false)}
+                className="proClaimButton"
+            >
+                X
+            </button>
             {showMakeClaim && <MakeClaimComp id={id} type={"1"} />}
         </div>
     );

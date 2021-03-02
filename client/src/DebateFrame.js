@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CommentModal from "./CommentModal";
 
 import ProClaimButtonComp from "./ProClaimButton";
-/* import ConClaimButtonComp from "./ConClaimButton"; */
+import ConClaimButtonComp from "./ConClaimButton";
 
 export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
@@ -62,15 +62,15 @@ export default function DebateFrame(props) {
                     <ProClaimButtonComp id={id} />
                 </div>
                 <div className="conButtonDiv">
-                    {/* <ConClaimButtonComp id={id} /> */}
+                    <ConClaimButtonComp id={id} />
                 </div>
             </div>
             <div className="allProClaims">
                 <h2>All Pro Claims</h2>
                 {proSubClaims &&
-                    proSubClaims.map((elem, index) => {
+                    proSubClaims.map((elem) => {
                         return (
-                            <div key={index}>
+                            <div key={elem._id}>
                                 <Link to={`/debate/${elem._id}`}>
                                     {elem.text}
                                     <button
@@ -79,6 +79,13 @@ export default function DebateFrame(props) {
                                         }
                                     >
                                         Comment
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setshowCommentModal(false)
+                                        }
+                                    >
+                                        Close Comments
                                     </button>
                                     {showCommentModal && <CommentModal />}
                                 </Link>
@@ -89,10 +96,27 @@ export default function DebateFrame(props) {
             <div className="allConClaims">
                 <h2>All Con Claims</h2>
                 {conSubClaims &&
-                    conSubClaims.map((elem, index) => {
+                    conSubClaims.map((elem) => {
                         return (
-                            <div key={index}>
-                                <p>{elem.text}</p>
+                            <div key={elem._id}>
+                                <Link to={`/debate/${elem._id}`}>
+                                    {elem.text}
+                                    <button
+                                        onClick={() =>
+                                            setshowCommentModal(true)
+                                        }
+                                    >
+                                        Comment
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setshowCommentModal(false)
+                                        }
+                                    >
+                                        Close Comments
+                                    </button>
+                                    {showCommentModal && <CommentModal />}
+                                </Link>
                             </div>
                         );
                     })}
