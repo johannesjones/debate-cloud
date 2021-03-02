@@ -14,15 +14,15 @@ export default function DebateFrame(props) {
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
-    const proSubClaims = useSelector(
-        (state) =>
-            state.allSubClaims &&
-            state.allSubClaims.filter((allSubClaims) => allSubClaims.pro)
+    const proSubClaims = useSelector((state) =>
+        state.allSubClaims
+            ? state.allSubClaims.filter((allSubClaims) => allSubClaims.pro)
+            : []
     );
-    const conSubClaims = useSelector(
-        (state) =>
-            state.allSubClaims &&
-            state.allSubClaims.filter((allSubClaims) => !allSubClaims.pro)
+    const conSubClaims = useSelector((state) =>
+        state.allSubClaims
+            ? state.allSubClaims.filter((allSubClaims) => !allSubClaims.pro)
+            : []
     );
 
     useEffect(() => {
@@ -41,10 +41,10 @@ export default function DebateFrame(props) {
             </div>
             <div className="buttonsDiv">
                 <div className="proButtonDiv">
-                    {/* <ProClaimButtonComp /> */}
+                    {/* <ProClaimButtonComp /> id={id} */}
                 </div>
                 <div className="conButtonDiv">
-                    {/* <ConClaimButtonComp /> */}
+                    {/* <ConClaimButtonComp /> id={id} */}
                 </div>
             </div>
             <div className="allProClaims">

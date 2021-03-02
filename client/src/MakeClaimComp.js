@@ -1,9 +1,13 @@
 import useStatefulFields from "./hooks/useStatefulFields";
 import useHandleSubmit from "./hooks/useHandleSubmit";
 
-export default function MakeClaimComp() {
+export default function MakeClaimComp(props) {
     const [values, handleChange] = useStatefulFields();
-    const [error, handleSubmit] = useHandleSubmit("/add-claim", values);
+    const [error, handleSubmit] = useHandleSubmit(
+        "/add-claim",
+        values,
+        props.id
+    );
 
     return (
         <div className="makeClaimDiv">

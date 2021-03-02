@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginStatus } from "../redux/actions";
 import axios from "../Axios";
 
-export default function useHandleSubmit(url, values) {
+export default function useHandleSubmit(url, values, id) {
     const dispatch = useDispatch();
     const [error, setError] = useState(false);
     //error was also 'false' in setState constructor function
@@ -20,7 +20,7 @@ export default function useHandleSubmit(url, values) {
                 console.log("RESULT: ", data.userloggedIn);
                 if (data.userloggedIn) {
                     try {
-                        const { data } = await axios.post(url, values);
+                        const { data } = await axios.post(url, { values, id });
                         console.log("DATA inside handleSubmit:", data);
                         console.log("DATA id", data.id);
                         //alternative version: data.success ? location.replace("/") : setError(true)

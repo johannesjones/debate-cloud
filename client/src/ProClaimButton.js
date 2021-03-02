@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import MakeClaimComp from "./MakeClaimComp";
 
-export default function ProClaimButtonComp() {
+export default function ProClaimButtonComp({ id }) {
     console.log("Inside ProClaimButtonComp");
+    console.log("ID PRO CLAIM BUTTON", id);
     const [showMakeClaim, setShowMakeClaim] = useState(false);
 
     useEffect(() => {

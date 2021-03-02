@@ -10,7 +10,7 @@ import Registration from "./Registration";
 import Login from "./Login";
 
 export default function App() {
-    const showModal = useSelector((state) => state.loginStatus);
+    const showAuthModal = useSelector((state) => state.loginStatus);
 
     /*
     useEffect(() => {
@@ -49,8 +49,8 @@ export default function App() {
                     />
                 </div>
                 <div className="authDiv">
-                    {showModal && <Registration />}
-                    {showModal && <Login />}
+                    {showAuthModal && <Registration />}
+                    {showAuthModal && <Login />}
                 </div>
             </div>
         </BrowserRouter>
