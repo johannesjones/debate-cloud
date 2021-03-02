@@ -22,9 +22,9 @@ export default function AllMainClaimsComp() {
             {
                 <div className="allMainClaimsDiv">
                     {allMainClaims &&
-                        allMainClaims.map((elem, index) => {
+                        allMainClaims.map((elem) => {
                             return (
-                                <div className="mainClaimCard" key={index}>
+                                <div className="mainClaimCard" key={elem._id}>
                                     <Link to={`/debate/${elem._id}`}>
                                         {elem.text}
                                     </Link>

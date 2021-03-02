@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginStatus } from "../redux/actions";
 import axios from "../Axios";
+import { useHistory } from "react-router-dom";
 
-export default function useHandleSubmit(url, values, id) {
+export default function useHandleSubmit(serverRoute, values, id, type) {
     const dispatch = useDispatch();
     const [error, setError] = useState(false);
     //error was also 'false' in setState constructor function
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); //prevent button to trigger refresh
@@ -20,13 +22,18 @@ export default function useHandleSubmit(url, values, id) {
                 console.log("RESULT: ", data.userloggedIn);
                 if (data.userloggedIn) {
                     try {
-                        const { data } = await axios.post(url, { values, id });
+                        const { data } = await axios.post(serverRoute, {
+                            values,
+                            id,
+                            type,
+                        });
                         console.log("DATA inside handleSubmit:", data);
-                        console.log("DATA id", data.id);
+                        console.log("DATA id", data._id);
                         //alternative version: data.success ? location.replace("/") : setError(true)
                         if (!data.error) {
                             console.log("SERVER SIDE WORKS!!!");
-                            location.replace("/debabte/:id");
+                            //location.replace(`/debate/${data._id}`);
+                            history.push(`/debate/${data._id}`);
                         } else {
                             setError({
                                 error: data.error,

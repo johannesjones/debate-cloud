@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const Claim = require("./models/debate");
 const User = require("./models/user");
 // connect to mongodb
-const dbURI = 'mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority';
+const dbURI =
+    "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
 mongoose
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() =>
@@ -88,12 +89,13 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/add-claim", async (req, res) => {
-    const { text, id, pro } = req.body;
+    console.log("REQ BODY ADD CLAIM: ", req.body.values);
+    const { text } = req.body.values;
+    const { url } = req.body;
     const { userId } = req.session.userId;
 
     const claim = new Claim({
-        parentClaimId: id,
-        pro: pro,
+        parentClaimUrl: url,
         text: text,
         authorId: userId,
     });

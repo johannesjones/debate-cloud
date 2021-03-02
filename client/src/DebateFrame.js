@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveAllSubClaims } from "./redux/actions";
+import { receiveAllSubClaims, receiveAllMainClaims } from "./redux/actions";
 
-/* import ProClaimButtonComp from "./ProClaimButton"; */
+import ProClaimButtonComp from "./ProClaimButton";
 /* import ConClaimButtonComp from "./ConClaimButton"; */
 
 export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
     //console.log("DEBATE FRAME props", props.match.params.id);
 
-    /*     var proSubClaims = [];
-    var conSubClaims = []; */
-
     const dispatch = useDispatch();
     const id = props.match.params.id;
+    console.log("ID INSIDE DEBATE FRAME", id);
     const proSubClaims = useSelector((state) =>
         state.allSubClaims
             ? state.allSubClaims.filter((allSubClaims) => allSubClaims.pro)
@@ -24,27 +22,36 @@ export default function DebateFrame(props) {
             ? state.allSubClaims.filter((allSubClaims) => !allSubClaims.pro)
             : []
     );
+    const mainClaim = useSelector((state) =>
+        state.allMainClaims
+            ? state.allMainClaims.filter(
+                  (allMainClaims) => allMainClaims._id === id
+              )[0]?.text
+            : []
+    );
+    console.log("MAIN CLAIM", mainClaim);
 
     useEffect(() => {
         console.log("Inside DebateFrame useEffect");
         dispatch(receiveAllSubClaims(id));
+        dispatch(receiveAllMainClaims());
         return () => {
             //cleanup;
             console.log("Inside DebateFrame useEffect cleanup");
         };
-    }, [proSubClaims, conSubClaims]);
+    }, []);
 
     return (
         <div className="debateFrameDiv">
             <div className="claimDiv">
-                <p>This is a claim</p>
+                <p>This is the main claim: {mainClaim}</p>
             </div>
             <div className="buttonsDiv">
                 <div className="proButtonDiv">
-                    {/* <ProClaimButtonComp /> id={id} */}
+                    <ProClaimButtonComp id={id} />
                 </div>
                 <div className="conButtonDiv">
-                    {/* <ConClaimButtonComp /> id={id} */}
+                    {/* <ConClaimButtonComp id={id} /> */}
                 </div>
             </div>
             <div className="allProClaims">

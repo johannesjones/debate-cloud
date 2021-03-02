@@ -13,14 +13,17 @@ export default function ProClaimButtonComp({ id }) {
             //cleanup;
             console.log("Inside ProClaimButtonComp useEffect cleanup");
         };
-    }, [showMakeClaim]);
+    }, []);
 
     return (
         <div className="proClaimButtonDiv">
-            <button onClick={setShowMakeClaim(true)} className="proClaimButton">
+            <button
+                onClick={() => setShowMakeClaim(true)}
+                className="proClaimButton"
+            >
                 Make Pro Claim
             </button>
-            {showMakeClaim && <MakeClaimComp />}
+            {showMakeClaim && <MakeClaimComp id={id} type={"1"} />}
         </div>
     );
 }

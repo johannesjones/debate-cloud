@@ -38,14 +38,20 @@ export default function App() {
                         path="/"
                         render={() => (
                             <div>
-                                <MakeClaimComp /> <AllMainClaimsComp />
+                                <MakeClaimComp />
+                                <AllMainClaimsComp />
                             </div>
                         )}
                     />
                     <Route
                         path="/debate/:id"
                         /* path="/debate" */
-                        render={(props) => <DebateFrame match={props.match} />}
+                        render={(props) => (
+                            <DebateFrame
+                                match={props.match}
+                                key={props.match.url}
+                            />
+                        )}
                     />
                 </div>
                 <div className="authDiv">
