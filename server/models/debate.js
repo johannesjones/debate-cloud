@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const debatesSchema = new Schema(
     {
-        parentClaimUrl: String,
-        pro: Boolean,
+        parentClaimId: String,
+        type: String,
         text: { type: String, required: true },
         authorId: Number,
         comments: [

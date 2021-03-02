@@ -75,6 +75,7 @@ app.post("/login", async (req, res) => {
     if (email && password) {
         try {
             const result = await User.findOne({ email: email });
+            console.log('Result in login: ', result);
             if (compare(password, result.password)) {
                 req.session.userId = result._id;
                 res.json({ success: true, data: result });
@@ -91,21 +92,35 @@ app.post("/login", async (req, res) => {
 app.post("/add-claim", async (req, res) => {
     console.log("REQ BODY ADD CLAIM: ", req.body.values);
     const { text } = req.body.values;
-    const { url } = req.body;
+    const { id, type } = req.body;
     const { userId } = req.session.userId;
 
-    const claim = new Claim({
-        parentClaimUrl: url,
-        text: text,
-        authorId: userId,
-    });
-
-    try {
-        const result = await claim.save();
-        console.log("results in add-claim: ", result);
-        res.json(result);
-    } catch (error) {
-        console.log("Error ins save claim: ", error);
+    if (id) {
+        const claim = new Claim({
+            parentClaimId: id,
+            type: type,
+            text: text,
+            authorId: userId,
+        });
+        try {
+            const result = await claim.save();
+            console.log("results in add-claim with id&type: ", result);
+            res.json(result);
+        } catch (error) {
+            console.log("Error ins save claim with id&type: ", error);
+        }
+    } else {
+        const claim = new Claim({
+            text: text,
+            authorId: userId,
+        });
+        try {
+            const result = await claim.save();
+            console.log("results in add-claim without id&type: ", result);
+            res.json(result);
+        } catch (error) {
+            console.log("Error ins save claim without id&type: ", error);
+        }
     }
 });
 
