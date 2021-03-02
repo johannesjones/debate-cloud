@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveAllSubClaims, receiveAllMainClaims } from "./redux/actions";
@@ -14,12 +15,16 @@ export default function DebateFrame(props) {
     console.log("ID INSIDE DEBATE FRAME", id);
     const proSubClaims = useSelector((state) =>
         state.allSubClaims
-            ? state.allSubClaims.filter((allSubClaims) => allSubClaims.pro)
+            ? state.allSubClaims.filter(
+                  (allSubClaims) => allSubClaims.type === "1"
+              )
             : []
     );
     const conSubClaims = useSelector((state) =>
         state.allSubClaims
-            ? state.allSubClaims.filter((allSubClaims) => !allSubClaims.pro)
+            ? state.allSubClaims.filter(
+                  (allSubClaims) => allSubClaims.type === "0"
+              )
             : []
     );
     const mainClaim = useSelector((state) =>
@@ -30,6 +35,8 @@ export default function DebateFrame(props) {
             : []
     );
     console.log("MAIN CLAIM", mainClaim);
+    console.log("proSubClaims", proSubClaims);
+    console.log("conSubClaims", conSubClaims);
 
     useEffect(() => {
         console.log("Inside DebateFrame useEffect");
@@ -60,7 +67,7 @@ export default function DebateFrame(props) {
                     proSubClaims.map((elem, index) => {
                         return (
                             <div key={index}>
-                                <p>{elem.claimText}</p>
+                                <p>{elem.text}</p>
                             </div>
                         );
                     })}
@@ -71,7 +78,7 @@ export default function DebateFrame(props) {
                     conSubClaims.map((elem, index) => {
                         return (
                             <div key={index}>
-                                <p>{elem.claimText}</p>
+                                <p>{elem.text}</p>
                             </div>
                         );
                     })}

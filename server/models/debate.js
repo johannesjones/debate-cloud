@@ -6,11 +6,11 @@ const debatesSchema = new Schema(
         parentClaimId: String,
         type: String,
         text: { type: String, required: true },
-        authorId: Number,
+        authorId: String,
         comments: [
             {
                 body: String,
-                authorId: Number,
+                authorId: String,
             },
         ],
     },

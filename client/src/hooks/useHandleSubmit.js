@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginStatus } from "../redux/actions";
 import axios from "../Axios";
 import { useHistory } from "react-router-dom";
+import { receiveAllSubClaims } from "../redux/actions";
 
 export default function useHandleSubmit(serverRoute, values, id, type) {
     const dispatch = useDispatch();
@@ -30,10 +31,13 @@ export default function useHandleSubmit(serverRoute, values, id, type) {
                         console.log("DATA inside handleSubmit:", data);
                         console.log("DATA id", data._id);
                         //alternative version: data.success ? location.replace("/") : setError(true)
-                        if (!data.error) {
-                            console.log("SERVER SIDE WORKS!!!");
-                            //location.replace(`/debate/${data._id}`);
+                        if (!data.error && !data.type) {
+                            console.log("WE GET REDIRECTED TO DISCUSSION!!!");
                             history.push(`/debate/${data._id}`);
+                        } else if (!data.error && data.type) {
+                            console.log("WE STAY ON THIS PAGE!!!");
+                            dispatch(receiveAllSubClaims(id));
+                            history.push(`/debate/${data.parentClaimId}`);
                         } else {
                             setError({
                                 error: data.error,

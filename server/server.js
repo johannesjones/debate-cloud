@@ -75,9 +75,10 @@ app.post("/login", async (req, res) => {
     if (email && password) {
         try {
             const result = await User.findOne({ email: email });
-            console.log('Result in login: ', result);
+            console.log("Result in login: ", result);
             if (compare(password, result.password)) {
                 req.session.userId = result._id;
+                console.log("REQ SESSION USER ID", req.session.userId);
                 res.json({ success: true, data: result });
             } else {
                 console.log("err in password");
@@ -90,10 +91,10 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/add-claim", async (req, res) => {
-    console.log("REQ BODY ADD CLAIM: ", req.body.values);
+    console.log("REQ BODY ADD CLAIM: ", req.body);
     const { text } = req.body.values;
     const { id, type } = req.body;
-    const { userId } = req.session.userId;
+    const { userId } = req.session;
 
     if (id && type) {
         const claim = new Claim({
@@ -172,7 +173,7 @@ app.get("/all-mainClaims", async (req, res) => {
 app.get("/get-subClaims/:id", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: req.params.id });
-        console.log('Result get-subClaims: ', result);
+        console.log("Result get-subClaims: ", result);
         res.json(result);
     } catch (error) {
         console.log("Error in get-subClaims: ", error);
@@ -182,7 +183,7 @@ app.get("/get-subClaims/:id", async (req, res) => {
 app.get("/claim/:id", async (req, res) => {
     try {
         const result = await Claim.findById({ _id: req.params.id });
-        console.log('Result in clain by id: ', result);
+        console.log("Result in clain by id: ", result);
         res.json(result);
     } catch (error) {
         console.log("Error in claim: ", error);
