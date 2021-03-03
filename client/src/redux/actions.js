@@ -36,6 +36,18 @@ export async function receiveAllSubClaims(id) {
     };
 }
 
+export async function receiveHeaderClaim(id) {
+    console.log("Inside receiveHeaderClaim", id);
+    //we can OPTIONALLY "talk" to the server here...
+    const { data } = await axios.get(`/claim/${id}`);
+    //we always return an object that is our action
+    console.log("DATA WITHIN receiveHeaderClaim", data);
+    return {
+        type: "RECEIVE_HEADER_CLAIM",
+        payload: data,
+    };
+}
+
 export async function comments(msgs) {
     console.log("Inside comments: ", msgs);
     //we can OPTIONALLY "talk" to the server here...

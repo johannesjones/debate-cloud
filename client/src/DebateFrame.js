@@ -1,7 +1,11 @@
 /* eslint-disable indent */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveAllSubClaims, receiveAllMainClaims } from "./redux/actions";
+import {
+    receiveAllSubClaims,
+    receiveAllMainClaims,
+    receiveHeaderClaim,
+} from "./redux/actions";
 import { Link } from "react-router-dom";
 import CommentModal from "./CommentModal";
 
@@ -40,29 +44,33 @@ export default function DebateFrame(props) {
             : []
     );
 
-    const mainSubClaim = useSelector((state) =>
+    /*     const mainSubClaim = useSelector((state) =>
         state.allSubClaims
             ? state.allSubClaims.filter(
                   (allSubClaims) => allSubClaims._id === id
               )[0]?.text
             : []
     );
-    console.log("MAIN SUB CLAIM", mainSubClaim);
+    console.log("MAIN SUB CLAIM", mainSubClaim); */
+
+    const headerClaim = useSelector((state) => state.headerClaim);
 
     console.log("MAIN CLAIM", mainClaim);
     console.log("proSubClaims", proSubClaims);
     console.log("conSubClaims", conSubClaims);
 
     useEffect(() => {
-        if (proSubClaims.length || conSubClaims.length) {
+        /*         if (proSubClaims.length || conSubClaims.length) {
             dispatch(receiveAllMainClaims());
 
             return;
         } else {
-            console.log("Inside DebateFrame useEffect");
-            dispatch(receiveAllSubClaims(id));
-            dispatch(receiveAllMainClaims());
-        }
+            console.log("Inside DebateFrame useEffect"); */
+        dispatch(receiveHeaderClaim(id));
+        dispatch(receiveAllSubClaims(id));
+        dispatch(receiveAllMainClaims());
+
+        /* } */
 
         return () => {
             //cleanup;
@@ -73,7 +81,10 @@ export default function DebateFrame(props) {
     return (
         <div className="debateFrameDiv">
             <div className="claimDiv">
-                <p>This is the main claim: {mainClaim}</p>
+                <p>
+                    This is the main claim:{" "}
+                    {headerClaim ? headerClaim.text : mainClaim}
+                </p>
             </div>
             <div className="buttonsDiv">
                 <div className="proButtonDiv">
