@@ -253,6 +253,8 @@ io.on("connection", async (socket) => {
 
         try {
             if (commentText) {
+                const result1 = await User.findById({ _id: userId});
+                console.log('Result 1: ', result1);
                 const result = await Claim.findOneAndUpdate(
                     { _id: claimId },
                     {
@@ -260,6 +262,8 @@ io.on("connection", async (socket) => {
                             comments: {
                                 commentText: commentText,
                                 authorId: userId,
+                                first: result1.first,
+                                last: result1.last,
                                 createdAt: new Date()
                             },
                         },
