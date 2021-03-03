@@ -39,14 +39,31 @@ export default function DebateFrame(props) {
               )[0]?.text
             : []
     );
+
+    const mainSubClaim = useSelector((state) =>
+        state.allSubClaims
+            ? state.allSubClaims.filter(
+                  (allSubClaims) => allSubClaims._id === id
+              )[0]?.text
+            : []
+    );
+    console.log("MAIN SUB CLAIM", mainSubClaim);
+
     console.log("MAIN CLAIM", mainClaim);
     console.log("proSubClaims", proSubClaims);
     console.log("conSubClaims", conSubClaims);
 
     useEffect(() => {
-        console.log("Inside DebateFrame useEffect");
-        dispatch(receiveAllSubClaims(id));
-        dispatch(receiveAllMainClaims());
+        if (proSubClaims.length || conSubClaims.length) {
+            dispatch(receiveAllMainClaims());
+
+            return;
+        } else {
+            console.log("Inside DebateFrame useEffect");
+            dispatch(receiveAllSubClaims(id));
+            dispatch(receiveAllMainClaims());
+        }
+
         return () => {
             //cleanup;
             console.log("Inside DebateFrame useEffect cleanup");
