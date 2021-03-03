@@ -41,6 +41,20 @@ export function reducer(state = {}, action) {
         //console.log("NEW STATE IN RECEIVE_ALL_SUBCLAIMS:", state);
     }
 
+    if (action.type === "RECEIVE_HEADER_CLAIM") {
+        //update the state object...
+        //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
+        //good array method for unfriend. FILTER method
+        //good array method for accept: MAP method
+
+        state = {
+            ...state,
+            headerClaim: action.payload,
+        };
+
+        //console.log("NEW STATE IN RECEIVE_ALL_SUBCLAIMS:", state);
+    }
+
     if (action.type === "GET_COMMENTS") {
         //update the state object...
         //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
@@ -60,13 +74,11 @@ export function reducer(state = {}, action) {
         //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
         //good array method for unfriend. FILTER method
         //good array method for accept: MAP method
-
         state = {
             ...state,
-            comment: action.payload,
+            comment: [...state.comments, action.payload],
         };
-
-        //console.log("NEW STATE IN RECEIVE_ALL_FRIENDS:", state);
+        console.log("NEW STATE IN UPDATE_COMMENTS:", state);
     }
 
     return state;

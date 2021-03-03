@@ -36,6 +36,18 @@ export async function receiveAllSubClaims(id) {
     };
 }
 
+export async function receiveHeaderClaim(id) {
+    console.log("Inside receiveHeaderClaim", id);
+    //we can OPTIONALLY "talk" to the server here...
+    const { data } = await axios.get(`/claim/${id}`);
+    //we always return an object that is our action
+    console.log("DATA WITHIN receiveHeaderClaim", data);
+    return {
+        type: "RECEIVE_HEADER_CLAIM",
+        payload: data,
+    };
+}
+
 export async function comments(msgs) {
     console.log("Inside comments: ", msgs);
     //we can OPTIONALLY "talk" to the server here...
@@ -53,7 +65,7 @@ export async function comments(msgs) {
 }
 
 export async function commentUpdate(msg) {
-    console.log("INSIDE commentUpdate: ", msg);
+    console.log("INSIDE commentUpdate: ", msg.comments);
     //we can OPTIONALLY "talk" to the server here...
     //NOT NEEDED HERE!!!
     //we always return an object that is our action
@@ -61,7 +73,7 @@ export async function commentUpdate(msg) {
     try {
         return {
             type: "UPDATE_COMMENTS",
-            payload: msg,
+            payload: msg.comments,
         };
     } catch (err) {
         console.log("ERR in commentUpdate: ", err);
