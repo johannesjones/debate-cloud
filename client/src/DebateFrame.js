@@ -8,6 +8,7 @@ import {
 } from "./redux/actions";
 import { Link } from "react-router-dom";
 import CommentModal from "./CommentModal";
+import RatingModal from "./RatingModal";
 
 import ProClaimButtonComp from "./ProClaimButton";
 import ConClaimButtonComp from "./ConClaimButton";
@@ -18,6 +19,7 @@ export default function DebateFrame(props) {
 
     const [showProCommentModal, setshowProCommentModal] = useState(false);
     const [showConCommentModal, setshowConCommentModal] = useState(false);
+    const [showRatingModal, setshowRatingModal] = useState(false);
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
@@ -104,6 +106,19 @@ export default function DebateFrame(props) {
                                         comments={elem.comments}
                                     />
                                 )}
+                                <button
+                                    onClick={() => setshowRatingModal(true)}
+                                >
+                                    Rate
+                                </button>
+                                <button
+                                    onClick={() => setshowRatingModal(false)}
+                                >
+                                    X
+                                </button>
+                                {showRatingModal && (
+                                    <RatingModal id={elem._id} />
+                                )}
                             </div>
                         );
                     })}
@@ -131,6 +146,19 @@ export default function DebateFrame(props) {
                                 </button>
                                 {showConCommentModal && (
                                     <CommentModal id={elem._id} />
+                                )}
+                                <button
+                                    onClick={() => setshowRatingModal(true)}
+                                >
+                                    Rate
+                                </button>
+                                <button
+                                    onClick={() => setshowRatingModal(false)}
+                                >
+                                    X
+                                </button>
+                                {showRatingModal && (
+                                    <RatingModal id={elem._id} />
                                 )}
                             </div>
                         );
