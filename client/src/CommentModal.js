@@ -18,7 +18,7 @@ export default function CommentModal({ id }) {
         console.log("COMMEND SENT, this is e", e);
         console.log("LOG COMMENT", comment);
         e.preventDefault();
-        socket.emit("sendComment", { commentText: comment, commentId: id });
+        socket.emit("sendComment", { commentText: comment, claimId: id });
         setComment("");
     };
 

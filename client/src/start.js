@@ -13,13 +13,12 @@ const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
-
+initSocket(store);
 let elem =
-    (initSocket(store),
-    (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    ));
+        (
+            <Provider store={store}>
+                <App />
+            </Provider>
+        );
 
 ReactDOM.render(elem, document.querySelector("main"));

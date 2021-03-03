@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const server = require("http").Server(app);
+
 const io = require("socket.io")(server, {
     allowRequest: (req, callback) =>
         callback(null, req.headers.referer.startsWith("http://localhost:3000")),
@@ -14,7 +15,7 @@ const Claim = require("./models/debate");
 const dbURI =
     "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
 mongoose
-    .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() =>
         server.listen(process.env.PORT || 3001, () =>
             console.log("Debate cloud listening...")
@@ -43,6 +44,10 @@ const cookieSessionMiddleware = cookieSession({
 });
 
 app.use(cookieSessionMiddleware);
+
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -170,7 +175,7 @@ app.get("/delete-comment/:id", async (req, res) => {
 app.get("/all-mainClaims", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: { $exists: false } });
-        console.log("Rows in all-claims: ", result);
+        // console.log("Rows in all-claims: ", result);
         res.json(result);
     } catch (error) {
         console.log("Error in all-claims: ", error);
@@ -180,7 +185,7 @@ app.get("/all-mainClaims", async (req, res) => {
 app.get("/get-subClaims/:id", async (req, res) => {
     try {
         const result = await Claim.find({ parentClaimId: req.params.id });
-        console.log("Result get-subClaims: ", result);
+        // console.log("Result get-subClaims: ", result);
         res.json(result);
     } catch (error) {
         console.log("Error in get-subClaims: ", error);
@@ -221,6 +226,7 @@ io.on("connection", async (socket) => {
         return socket.disconnect(true);
     }
     const userId = socket.request.session.userId;
+    console.log("Socket req session: ", socket.request.session);
 
     console.log(`socket with id ${socket.id} is now connected`);
     console.log(`socket UserId: ${userId}`);
@@ -239,12 +245,12 @@ io.on("connection", async (socket) => {
 
     socket.on("sendComment", async (data) => {
         console.log("Data in sendComment: ", data);
-        const { commentText, commentId } = data;
+        const { commentText, claimId } = data;
 
         try {
             if (commentText) {
                 const result = await Claim.findOneAndUpdate(
-                    { _id: commentId },
+                    { _id: claimId },
                     {
                         $set: {
                             comments: [
