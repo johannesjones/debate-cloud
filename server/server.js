@@ -252,13 +252,15 @@ io.on("connection", async (socket) => {
                 const result = await Claim.findOneAndUpdate(
                     { _id: claimId },
                     {
-                        $set: {
-                            comments: [
-                                { commentText: commentText, authorId: userId },
-                            ],
+                        $push: {
+                            comments: {
+                                commentText: commentText,
+                                authorId: userId,
+                                createdAt: new Date()
+                            },
                         },
                     },
-                    { upsert: true }
+                    { new: true }
                 );
                 console.log("Result: ", result);
                 //SHOULD WE EMIT SOMETHING HERE? SO WE CAN AUTOMATICALLY SEE THE COMMENT WE HAVE SENT
