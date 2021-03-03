@@ -45,11 +45,16 @@ export default function CommentModal({ id }) {
                                     src={comment.profile_pic_url || "/default.png"}
                                 /> */}
                                 <p>
-                                    {/*                                     {new Intl.DateTimeFormat("en-GB", {
+                                    {new Intl.DateTimeFormat("en-GB", {
                                         dateStyle: "short",
                                         timeStyle: "short",
-                                    }).format(new Date(comments.createdAt))} */}
-                                    <strong>{comment.commentText}</strong>
+                                    }).format(new Date(comment.createdAt))}
+                                    <br></br>
+                                    <br></br>
+                                    &apos;
+                                    <strong>
+                                        {comment.commentText}&apos;{" "}
+                                    </strong>
                                 </p>
                             </div>
                         ))}
