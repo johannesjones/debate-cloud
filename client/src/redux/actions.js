@@ -53,7 +53,7 @@ export async function comments(msgs) {
 }
 
 export async function commentUpdate(msg) {
-    console.log("INSIDE commentUpdate: ", msg);
+    console.log("INSIDE commentUpdate: ", msg.comments);
     //we can OPTIONALLY "talk" to the server here...
     //NOT NEEDED HERE!!!
     //we always return an object that is our action
@@ -61,7 +61,7 @@ export async function commentUpdate(msg) {
     try {
         return {
             type: "UPDATE_COMMENTS",
-            payload: msg,
+            payload: msg.comments,
         };
     } catch (err) {
         console.log("ERR in commentUpdate: ", err);

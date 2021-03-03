@@ -9,14 +9,18 @@ export default function CommentModal({ id }) {
     const [comment, setComment] = useState("");
 
     const comments = useSelector((state) => state.comments);
+    const commentUpdate = useSelector((state) => state.comment);
+
+    console.log("LOG COMMENTS", comments);
+    console.log("LOG commentUpdate", commentUpdate);
 
     useEffect(() => {
         ref.current.scrollTop = ref.current.scrollHeight;
-    }, [comments]);
+    }, [comments, commentUpdate]);
 
     const sendComment = (e) => {
         console.log("COMMEND SENT, this is e", e);
-        console.log("LOG COMMENT", comment);
+        console.log("LOG COMMENT inside sendComment", comment);
         e.preventDefault();
         socket.emit("sendComment", { commentText: comment, claimId: id });
         setComment("");
@@ -27,6 +31,11 @@ export default function CommentModal({ id }) {
             <h2 id="commentHeadline">Comments:</h2>
             <div className="comment">
                 <div className="comments" ref={ref}>
+                    {commentUpdate && (
+                        <p>
+                            <strong>{commentUpdate[0].commentText}</strong>
+                        </p>
+                    )}
                     {comments &&
                         comments.map((comment, index) => (
                             <div className="comment" key={index}>
@@ -40,14 +49,11 @@ export default function CommentModal({ id }) {
                                     }).format(new Date(comment.createdAt))}
                                     <br></br>
                                     <br></br>
-                                    &apos;
-                                    <strong>
-                                        {comment.body}
-                                        &apos;{" "}
-                                    </strong>
+                                    <strong>{comment.commentText}</strong>
                                 </p>
                             </div>
                         ))}
+
                     <div className="commentInput">
                         <textarea
                             cols="30"

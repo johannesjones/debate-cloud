@@ -15,7 +15,11 @@ const Claim = require("./models/debate");
 const dbURI =
     "mongodb+srv://net-ninja:0815@cluster0.7ujqf.mongodb.net/debates?retryWrites=true&w=majority";
 mongoose
-    .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+    .connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    })
     .then(() =>
         server.listen(process.env.PORT || 3001, () =>
             console.log("Debate cloud listening...")
@@ -252,19 +256,18 @@ io.on("connection", async (socket) => {
                 const result = await Claim.findOneAndUpdate(
                     { _id: claimId },
                     {
-                        $set: {
-                            comments: [
-                                { commentText: commentText, authorId: userId },
-                            ],
-                        },
-                    },
-                    { upsert: true }
+                        comments: [
+                            { commentText: commentText, authorId: userId },
+                        ],
+                    }
+
+                    //{ upsert: true }
                 );
                 console.log("Result: ", result);
                 //SHOULD WE EMIT SOMETHING HERE? SO WE CAN AUTOMATICALLY SEE THE COMMENT WE HAVE SENT
                 // const comment = {
                 // };
-                // io.emit("cha", msg);
+                io.emit("commentUpdate", result);
             }
         } catch (error) {
             console.log("Err in addMsg: ", error);
