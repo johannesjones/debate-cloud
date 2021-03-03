@@ -53,7 +53,7 @@ export default function CommentModal({ id }) {
                                     <br></br>
                                     &apos;
                                     <strong>
-                                        {comment.commentText}&apos;{" "}
+                                        {comment.commentText}&apos;{" "} {comment.first} {comment.last}
                                     </strong>
                                 </p>
                             </div>

@@ -11,6 +11,8 @@ const debatesSchema = new Schema(
             {
                 commentText: String,
                 authorId: String,
+                first: String,
+                last: String,
                 createdAt: { type: String, default: Date },
             },
         ],
