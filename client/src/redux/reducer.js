@@ -76,8 +76,14 @@ export function reducer(state = {}, action) {
         //good array method for accept: MAP method
         state = {
             ...state,
-            comment: [...state.comments, action.payload],
+            subClaims: state.allSubClaims.map((subClaim) => {
+                if (subClaim._id === action.payload._id) {
+                    subClaim.comments = action.payload.comments;
+                }
+                return subClaim;
+            }),
         };
+        console.log("ACTION: ", action);
         console.log("NEW STATE IN UPDATE_COMMENTS:", state);
     }
 

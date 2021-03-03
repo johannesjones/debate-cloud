@@ -44,15 +44,6 @@ export default function DebateFrame(props) {
             : []
     );
 
-    /*     const mainSubClaim = useSelector((state) =>
-        state.allSubClaims
-            ? state.allSubClaims.filter(
-                  (allSubClaims) => allSubClaims._id === id
-              )[0]?.text
-            : []
-    );
-    console.log("MAIN SUB CLAIM", mainSubClaim); */
-
     const headerClaim = useSelector((state) => state.headerClaim);
 
     console.log("MAIN CLAIM", mainClaim);
@@ -60,17 +51,9 @@ export default function DebateFrame(props) {
     console.log("conSubClaims", conSubClaims);
 
     useEffect(() => {
-        /*         if (proSubClaims.length || conSubClaims.length) {
-            dispatch(receiveAllMainClaims());
-
-            return;
-        } else {
-            console.log("Inside DebateFrame useEffect"); */
         dispatch(receiveHeaderClaim(id));
         dispatch(receiveAllSubClaims(id));
         dispatch(receiveAllMainClaims());
-
-        /* } */
 
         return () => {
             //cleanup;
@@ -116,7 +99,10 @@ export default function DebateFrame(props) {
                                     X
                                 </button>
                                 {showProCommentModal && (
-                                    <CommentModal id={elem._id} />
+                                    <CommentModal
+                                        id={elem._id}
+                                        comments={elem.comments}
+                                    />
                                 )}
                             </div>
                         );

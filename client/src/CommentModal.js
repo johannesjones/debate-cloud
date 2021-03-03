@@ -8,7 +8,9 @@ export default function CommentModal({ id }) {
 
     const [comment, setComment] = useState("");
 
-    const comments = useSelector((state) => state.comments);
+    const comments = useSelector(
+        (state) => state.allSubClaims.find((claim) => claim._id === id).comments
+    );
     const commentUpdate = useSelector((state) => state.comment);
 
     console.log("LOG COMMENTS", comments);
@@ -43,12 +45,10 @@ export default function CommentModal({ id }) {
                                     src={comment.profile_pic_url || "/default.png"}
                                 /> */}
                                 <p>
-                                    {new Intl.DateTimeFormat("en-GB", {
+                                    {/*                                     {new Intl.DateTimeFormat("en-GB", {
                                         dateStyle: "short",
                                         timeStyle: "short",
-                                    }).format(new Date(comment.createdAt))}
-                                    <br></br>
-                                    <br></br>
+                                    }).format(new Date(comments.createdAt))} */}
                                     <strong>{comment.commentText}</strong>
                                 </p>
                             </div>
