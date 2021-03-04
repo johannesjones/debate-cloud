@@ -101,19 +101,23 @@ export default function DebateFrame(props) {
                                             />
                                         </button>
                                     </div>
-                                    <button
-                                        onClick={() =>
-                                            setshowProCommentModal(false)
-                                        }
-                                        type="submit"
-                                    >
-                                        X
-                                    </button>
                                     {showProCommentModal && (
-                                        <CommentModal
-                                            id={elem._id}
-                                            comments={elem.comments}
-                                        />
+                                        <div>
+                                            <button
+                                                onClick={() =>
+                                                    setshowProCommentModal(
+                                                        false
+                                                    )
+                                                }
+                                                type="submit"
+                                            >
+                                                X
+                                            </button>
+                                            <CommentModal
+                                                id={elem._id}
+                                                comments={elem.comments}
+                                            />
+                                        </div>
                                     )}
                                     <button
                                         onClick={() => setshowRatingModal(true)}
@@ -121,16 +125,18 @@ export default function DebateFrame(props) {
                                     >
                                         Rate
                                     </button>
-                                    <button
-                                        onClick={() =>
-                                            setshowRatingModal(false)
-                                        }
-                                        type="submit"
-                                    >
-                                        X
-                                    </button>
                                     {showRatingModal && (
-                                        <RatingModal id={elem._id} />
+                                        <div>
+                                            <button
+                                                onClick={() =>
+                                                    setshowRatingModal(false)
+                                                }
+                                                type="submit"
+                                            >
+                                                X
+                                            </button>
+                                            <RatingModal id={elem._id} />
+                                        </div>
                                     )}
                                 </div>
                             );

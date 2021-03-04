@@ -6,24 +6,10 @@ import MakeClaimComp from "./MakeClaimComp";
 import AllMainClaimsComp from "./AllMainClaimsComp";
 
 import Logo from "./Logo";
-import Registration from "./Registration";
-import Login from "./Login";
+import AuthModal from "./AuthModal";
 
 export default function App() {
     const showAuthModal = useSelector((state) => state.loginStatus);
-
-    /*
-    useEffect(() => {
-        effect;
-        //dispatch getUserInfo
-        //in actions: axios request to server to check if the user is logged in
-        //if server
-        //uploader
-
-        return () => {
-            cleanup;
-        };
-    }, [input]); */
 
     return (
         <BrowserRouter>
@@ -54,11 +40,8 @@ export default function App() {
                         )}
                     />
                 </div>
-                <div className="authDiv">
-                    {showAuthModal && <Registration />}
-                    {showAuthModal && <Login />}
-                </div>
             </div>
+            <div className="authDiv">{showAuthModal && <AuthModal />}</div>
         </BrowserRouter>
     );
 }
