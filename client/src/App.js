@@ -16,7 +16,9 @@ export default function App() {
             <div className="appDiv">
                 <div className="headerDiv">
                     <Logo />
-                    <h1>DebateCloud</h1>
+                    <a href="/logout">
+                        <h1>DebateCloud</h1>
+                    </a>
                 </div>
                 <div className="mainBodyDiv">
                     <Route
