@@ -23,12 +23,12 @@ export default function ConClaimButtonComp({ id }) {
             </button>
 
             {showMakeConClaimStatus && (
-                <div>
+                <div className="conClaimButton">
                     <button
+                        id="closeSubClaimButton"
                         onClick={() => dispatch(showConMakeClaim(false))}
-                        className="proClaimButton"
                     >
-                        X
+                        close
                     </button>
                     <MakeClaimComp id={id} type={"0"} />
                 </div>
