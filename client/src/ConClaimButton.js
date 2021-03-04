@@ -12,15 +12,20 @@ export default function ConClaimButtonComp({ id }) {
                 onClick={() => setShowMakeClaim(true)}
                 className="conClaimButton"
             >
-                Make Con Claim
+                Add Con Claim
             </button>
-            <button
-                onClick={() => setShowMakeClaim(false)}
-                className="proClaimButton"
-            >
-                X
-            </button>
-            {showMakeClaim && <MakeClaimComp id={id} type={"0"} />}
+
+            {showMakeClaim && (
+                <div>
+                    <button
+                        onClick={() => setShowMakeClaim(false)}
+                        className="proClaimButton"
+                    >
+                        X
+                    </button>
+                    <MakeClaimComp id={id} type={"0"} />
+                </div>
+            )}
         </div>
     );
 }
