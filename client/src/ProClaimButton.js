@@ -24,12 +24,11 @@ export default function ProClaimButtonComp({ id }) {
             </button>
 
             {showMakeProClaimStatus && (
-                <div>
-                    <button
+                <div className="proClaimButton">
+                    <button id='closeProClaimButton'
                         onClick={() => dispatch(showProMakeClaim(false))}
-                        className="proClaimButton"
                     >
-                        X
+                        close
                     </button>
                     <MakeClaimComp id={id} type={"1"} />
                 </div>
