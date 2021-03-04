@@ -123,6 +123,10 @@ body {
     margin-top: 10px;
 }
 
+/* .bothButtonsDiv {
+    display: flex;
+} */
+
 .buttonsDiv {
     display: flex;
     justify-content: space-between;
@@ -214,7 +218,7 @@ button:hover {
     margin: 3px;
     transition: 0.1s ease;
     width: 50vh;
-    height: 25vh;
+    min-height: 20vh;
 }
 
 .subClaimCard #closeComment {

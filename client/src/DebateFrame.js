@@ -63,6 +63,7 @@ export default function DebateFrame(props) {
             <div className="mainClaimDiv">
                 <h1>{headerClaim ? headerClaim.text : mainClaim}</h1>
             </div>
+
             <div className="buttonsDiv">
                 <div className="proButtonDiv">
                     <ProClaimButtonComp id={id} />
@@ -71,6 +72,7 @@ export default function DebateFrame(props) {
                     <ConClaimButtonComp id={id} />
                 </div>
             </div>
+
             <div className="allSubClaims">
                 <div className="allProClaims">
                     <h2>All Pro Claims</h2>

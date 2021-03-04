@@ -1,5 +1,6 @@
 import Registration from "./Registration";
 import Login from "./Login";
+import Logo from "./Logo";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginStatus } from "./redux/actions";
@@ -11,6 +12,7 @@ export default function AuthModal() {
     return (
         <>
             <div className="RegLoginDiv">
+                <Logo />
                 {showRegModal && (
                     <div>
                         <div className="closeRegLogin">
