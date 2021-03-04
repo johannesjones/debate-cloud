@@ -28,10 +28,11 @@ export default function ProSubClaim({ elem, key }) {
             {showConCommentModal && (
                 <div>
                     <button
+                        id="closeComment"
                         onClick={() => setshowConCommentModal(false)}
                         type="submit"
                     >
-                        X
+                        close
                     </button>
                     <CommentModal id={elem._id} />
                 </div>

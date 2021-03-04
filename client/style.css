@@ -195,6 +195,18 @@ button:hover {
     height: 25vh;
 }
 
+.subClaimCard #closeComment {
+    float: right;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-family: arial, sans-serif;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 10px;
+}
+
 .eachSubClaim {
     background-color: rgb(255, 255, 255);
     border: 1px rgb(189, 182, 182) solid;
