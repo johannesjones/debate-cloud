@@ -19,7 +19,7 @@ export default function ConClaimButtonComp({ id }) {
                 onClick={() => dispatch(showConMakeClaim(true))}
                 className="conClaimButton"
             >
-                Add Con Claim
+                <img src="/ConClaimButton.png" />
             </button>
 
             {showMakeConClaimStatus && (
