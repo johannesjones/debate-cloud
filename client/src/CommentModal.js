@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { socket } from "./socket";
+import { loginStatus } from "./redux/actions";
+import axios from "./Axios";
 
 export default function CommentModal({ id }) {
     console.log("Inside CommentModal, Id subClaim: ", id);
     const ref = useRef();
+    const dispatch = useDispatch();
 
     const [comment, setComment] = useState("");
 
@@ -20,12 +23,25 @@ export default function CommentModal({ id }) {
         ref.current.scrollTop = ref.current.scrollHeight;
     }, [comments, commentUpdate]);
 
-    const sendComment = (e) => {
-        console.log("COMMEND SENT, this is e", e);
-        console.log("LOG COMMENT inside sendComment", comment);
-        e.preventDefault();
-        socket.emit("sendComment", { commentText: comment, claimId: id });
-        setComment("");
+    const sendComment = async (e) => {
+        try {
+            const { data } = await axios.get("/session-status");
+            console.log("RESULT: ", data.userloggedIn);
+            if (data.userloggedIn) {
+                console.log("COMMEND SENT, this is e", e);
+                console.log("LOG COMMENT inside sendComment", comment);
+                e.preventDefault();
+                socket.emit("sendComment", {
+                    commentText: comment,
+                    claimId: id,
+                });
+                setComment("");
+            } else {
+                dispatch(loginStatus(true));
+            }
+        } catch (error) {
+            console.log("ERROR IN sendComment", error);
+        }
     };
 
     return (
