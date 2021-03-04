@@ -1,6 +1,6 @@
 //import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { showMakeClaim } from "./redux/actions";
+import { showProMakeClaim } from "./redux/actions";
 
 import MakeClaimComp from "./MakeClaimComp";
 
@@ -10,21 +10,23 @@ export default function ProClaimButtonComp({ id }) {
     const dispatch = useDispatch();
 
     //const [showMakeClaim, setShowMakeClaim] = useState(false);
-    const showMakeClaimStatus = useSelector((state) => state.showMakeClaim);
+    const showMakeProClaimStatus = useSelector(
+        (state) => state.showProMakeClaim
+    );
 
     return (
         <div className="proClaimButtonDiv">
             <button
-                onClick={() => dispatch(showMakeClaim(true))}
+                onClick={() => dispatch(showProMakeClaim(true))}
                 className="proClaimButton"
             >
                 Add Pro Claim
             </button>
 
-            {showMakeClaimStatus && (
+            {showMakeProClaimStatus && (
                 <div>
                     <button
-                        onClick={() => dispatch(showMakeClaim(false))}
+                        onClick={() => dispatch(showProMakeClaim(false))}
                         className="proClaimButton"
                     >
                         X
