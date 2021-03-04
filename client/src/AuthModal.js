@@ -10,25 +10,44 @@ export default function AuthModal() {
 
     return (
         <>
-            <div className="closeRegLogin">
-                <button onClick={() => dispatch(loginStatus(false))}>Close</button>
-            </div>
             <div className="RegLoginDiv">
                 {showRegModal && (
                     <div>
+                        <div className="closeRegLogin">
+                            <button
+                                id="login"
+                                onClick={() => setshowRegModal(false)}
+                            >
+                                Login here
+                            </button>
+                            <button
+                                onClick={() => dispatch(loginStatus(false))}
+                            >
+                                Close
+                            </button>
+                        </div>
+
                         <Registration />
-                        <button id="login" onClick={() => setshowRegModal(false)}>
-                            Login here
-                        </button>
                     </div>
                 )}
 
                 {!showRegModal && (
                     <div>
+                        <div className="closeRegLogin">
+                            <button
+                                id="login"
+                                onClick={() => setshowRegModal(true)}
+                            >
+                                ← Back to Register
+                            </button>
+                            <button
+                                onClick={() => dispatch(loginStatus(false))}
+                            >
+                                Close
+                            </button>
+                        </div>
+
                         <Login />
-                        <button id="login" onClick={() => setshowRegModal(true)}>
-                            ← Back to Register
-                        </button>
                     </div>
                 )}
             </div>

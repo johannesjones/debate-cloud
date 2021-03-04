@@ -37,12 +37,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 400px;
-    margin-top: 20px;
-    border: 1px rgb(189, 182, 182) solid;
-    border-radius: 5px;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
+    width: 60vh;
+    height: 60vh;
+
     padding: 5px;
     transition: 0.1s ease;
 }
@@ -51,13 +48,13 @@ body {
     height: 30px;
     margin: 10px;
     border-radius: 20px;
-    padding: 10px;  
+    padding: 10px;
 }
 
 .RegLoginDiv #login {
-    background: none!important;
+    background: none !important;
     border: none;
-    padding: 0!important;
+    padding: 0 !important;
     font-family: arial, sans-serif;
     color: #069;
     text-decoration: underline;
@@ -67,19 +64,24 @@ body {
 .authDiv {
     position: absolute;
     z-index: 1;
-    top: 25%;
-    left: 38%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgb(160, 183, 201);
+    border: 1px rgb(189, 182, 182) solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
 }
 
 .closeRegLogin {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
 }
 
 .closeRegLogin button {
-    background: none!important;
+    background: none !important;
     border: none;
-    padding: 0!important;
+    padding: 0 !important;
     font-family: arial, sans-serif;
     color: #069;
     text-decoration: underline;
