@@ -19,6 +19,7 @@ export default function ProSubClaim({ elem, key }) {
                     <button
                         onClick={() => setshowProCommentModal(true)}
                         type="submit"
+                        className="showCommentModal"
                     >
                         <img src="/showCommentModal.png" alt="submit" />
                     </button>
@@ -34,9 +35,14 @@ export default function ProSubClaim({ elem, key }) {
                         <CommentModal id={elem._id} comments={elem.comments} />
                     </div>
                 )}
-                <button onClick={() => setshowRatingModal(true)} type="submit">
-                    Rate
-                </button>
+                <div className="rating">
+                    <button
+                        onClick={() => setshowRatingModal(true)}
+                        type="submit"
+                    >
+                        <img src="/UpRate.png" alt="rateUp" />
+                    </button>
+                </div>
                 {showRatingModal && (
                     <div>
                         <button
