@@ -141,9 +141,11 @@ export default function DebateFrame(props) {
                     {conSubClaims &&
                         conSubClaims.map((elem) => {
                             return (
-                                <div key={elem._id}>
+                                <div key={elem._id} className="subClaimCard">
                                     <Link to={`/debate/${elem._id}`}>
-                                        {elem.text}
+                                        <button className="eachSubClaim">
+                                            {elem.text}
+                                        </button>
                                     </Link>
                                     <button
                                         onClick={() =>
@@ -152,7 +154,10 @@ export default function DebateFrame(props) {
                                         className="showCommentModal"
                                         type="submit"
                                     >
-                                        Comment
+                                        <img
+                                            src="/showCommentModal.png"
+                                            alt="submit"
+                                        />
                                     </button>
                                     <button
                                         onClick={() =>

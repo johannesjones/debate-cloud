@@ -14,6 +14,11 @@ body {
     background-color: rgb(168, 168, 230);
 }
 
+.headerDiv h1 {
+    margin-right: 7px;
+    /* font-family: ; */
+}
+
 .makeClaimCard {
     display: flex;
     flex-direction: column;
