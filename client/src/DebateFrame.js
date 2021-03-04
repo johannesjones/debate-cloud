@@ -1,25 +1,20 @@
 /* eslint-disable indent */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     receiveAllSubClaims,
     receiveAllMainClaims,
     receiveHeaderClaim,
 } from "./redux/actions";
-import { Link } from "react-router-dom";
-import CommentModal from "./CommentModal";
-import RatingModal from "./RatingModal";
 
 import ProClaimButtonComp from "./ProClaimButton";
 import ConClaimButtonComp from "./ConClaimButton";
+import ProSubClaim from "./ProSubClaim";
+import ConSubClaim from "./ConSubClaim";
 
 export default function DebateFrame(props) {
     console.log("Inside DebateFrame");
     //console.log("DEBATE FRAME props", props.match.params.id);
-
-    const [showProCommentModal, setshowProCommentModal] = useState(false);
-    const [showConCommentModal, setshowConCommentModal] = useState(false);
-    const [showRatingModal, setshowRatingModal] = useState(false);
 
     const dispatch = useDispatch();
     const id = props.match.params.id;
@@ -80,122 +75,16 @@ export default function DebateFrame(props) {
                 <div className="allProClaims">
                     <h2>All Pro Claims</h2>
                     {proSubClaims &&
-                        proSubClaims.map((elem) => {
-                            return (
-                                <div key={elem._id} className="subClaimCard">
-                                    <Link to={`/debate/${elem._id}`}>
-                                        <button className="eachSubClaim">
-                                            {elem.text}
-                                        </button>
-                                    </Link>
-                                    <div className="showCommentModal">
-                                        <button
-                                            onClick={() =>
-                                                setshowProCommentModal(true)
-                                            }
-                                            type="submit"
-                                        >
-                                            <img
-                                                src="/showCommentModal.png"
-                                                alt="submit"
-                                            />
-                                        </button>
-                                    </div>
-                                    {showProCommentModal && (
-                                        <div>
-                                            <button
-                                                onClick={() =>
-                                                    setshowProCommentModal(
-                                                        false
-                                                    )
-                                                }
-                                                type="submit"
-                                            >
-                                                X
-                                            </button>
-                                            <CommentModal
-                                                id={elem._id}
-                                                comments={elem.comments}
-                                            />
-                                        </div>
-                                    )}
-                                    <button
-                                        onClick={() => setshowRatingModal(true)}
-                                        type="submit"
-                                    >
-                                        Rate
-                                    </button>
-                                    {showRatingModal && (
-                                        <div>
-                                            <button
-                                                onClick={() =>
-                                                    setshowRatingModal(false)
-                                                }
-                                                type="submit"
-                                            >
-                                                X
-                                            </button>
-                                            <RatingModal id={elem._id} />
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
+                        proSubClaims.map((elem, index) => (
+                            <ProSubClaim elem={elem} key={index} />
+                        ))}
                 </div>
                 <div className="allConClaims">
                     <h2>All Con Claims</h2>
                     {conSubClaims &&
-                        conSubClaims.map((elem) => {
-                            return (
-                                <div key={elem._id} className="subClaimCard">
-                                    <Link to={`/debate/${elem._id}`}>
-                                        <button className="eachSubClaim">
-                                            {elem.text}
-                                        </button>
-                                    </Link>
-                                    <button
-                                        onClick={() =>
-                                            setshowConCommentModal(true)
-                                        }
-                                        className="showCommentModal"
-                                        type="submit"
-                                    >
-                                        <img
-                                            src="/showCommentModal.png"
-                                            alt="submit"
-                                        />
-                                    </button>
-                                    <button
-                                        onClick={() =>
-                                            setshowConCommentModal(false)
-                                        }
-                                        type="submit"
-                                    >
-                                        X
-                                    </button>
-                                    {showConCommentModal && (
-                                        <CommentModal id={elem._id} />
-                                    )}
-                                    <button
-                                        onClick={() => setshowRatingModal(true)}
-                                        type="submit"
-                                    >
-                                        Rate
-                                    </button>
-                                    <button
-                                        onClick={() =>
-                                            setshowRatingModal(false)
-                                        }
-                                        type="submit"
-                                    >
-                                        X
-                                    </button>
-                                    {showRatingModal && (
-                                        <RatingModal id={elem._id} />
-                                    )}
-                                </div>
-                            );
-                        })}
+                        conSubClaims.map((elem, index) => (
+                            <ConSubClaim elem={elem} key={index} />
+                        ))}
                 </div>
             </div>
         </div>
