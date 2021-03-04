@@ -40,7 +40,7 @@ export default function Registration() {
                     placeholder="password"
                 />
                 <br />
-                <button onClick={handleSubmit}>submit</button>
+                <button id='submit' onClick={handleSubmit}>submit</button>
                 <br />
             </div>
         </div>
