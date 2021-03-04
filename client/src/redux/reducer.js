@@ -10,6 +10,20 @@ export function reducer(state = {}, action) {
             loginStatus: action.payload,
         };
 
+        //console.log("NEW STATE IN CHANGE_LOGIN_STATUS:", state);
+    }
+
+    if (action.type === "CHANGE_MAKECLAIM_STATUS") {
+        //update the state object...
+        //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
+        //good array method for unfriend. FILTER method
+        //good array method for accept: MAP method
+
+        state = {
+            ...state,
+            showMakeClaim: action.payload,
+        };
+
         console.log("NEW STATE IN CHANGE_LOGIN_STATUS:", state);
     }
 

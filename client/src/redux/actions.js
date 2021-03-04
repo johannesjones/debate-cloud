@@ -12,6 +12,18 @@ export async function loginStatus(param) {
     };
 }
 
+export async function showMakeClaim(param) {
+    console.log("Inside loginStatus");
+    //we can OPTIONALLY "talk" to the server here...
+    //const { data } = await axios.get(`/session-status`);
+    //we always return an object that is our action
+    //console.log("DATA WITHIN loginStatus", data);
+    return {
+        type: "CHANGE_MAKECLAIM_STATUS",
+        payload: param,
+    };
+}
+
 export async function receiveAllMainClaims() {
     console.log("Inside receiveAllMainClaims");
     //we can OPTIONALLY "talk" to the server here...

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginStatus } from "../redux/actions";
 import axios from "../Axios";
 import { useHistory } from "react-router-dom";
-import { receiveAllSubClaims } from "../redux/actions";
+import {
+    receiveAllSubClaims,
+    showMakeClaim,
+    loginStatus,
+} from "../redux/actions";
 
 export default function useHandleSubmit(serverRoute, values, id, type) {
     const dispatch = useDispatch();
@@ -37,6 +40,7 @@ export default function useHandleSubmit(serverRoute, values, id, type) {
                         } else if (!data.error && data.type) {
                             console.log("WE STAY ON THIS PAGE!!!");
                             dispatch(receiveAllSubClaims(id));
+                            dispatch(showMakeClaim(false));
                             history.push(`/debate/${data.parentClaimId}`);
                         } else {
                             setError({
