@@ -20,7 +20,7 @@ export default function ProClaimButtonComp({ id }) {
                 onClick={() => dispatch(showProMakeClaim(true))}
                 className="proClaimButton"
             >
-                Add Pro Claim
+                <img src='/ProClaimButton.png'/>
             </button>
 
             {showMakeProClaimStatus && (
