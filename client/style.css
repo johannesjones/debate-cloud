@@ -24,6 +24,7 @@ body {
 .logoImgDiv {
     width: 70px;
     height: 70px;
+    padding: 7px 0 0 7px;
 }
 
 .authDiv {
@@ -47,5 +48,87 @@ body {
     border-radius: 5px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
     padding: 5px;
+    transition: 0.1s ease;
+}
+
+.debateFrameDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainClaimDiv {
+    background-color: rgb(255, 255, 255);
+    border: 1px rgb(189, 182, 182) solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
+    padding: 5px;
+    transition: 0.1s ease;
+    margin-top: 10px;
+}
+
+.buttonsDiv {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    border: 1px rgb(189, 182, 182) solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
+    padding: 5px;
+    margin: 3px;
+    transition: 0.1s ease;
+}
+
+.allSubClaims {
+    display: flex;
+}
+
+.allProClaims {
+    margin: 10px;
+}
+
+.allConClaims {
+    margin: 10px;
+}
+
+button {
+    margin: 2px;
+    padding: 2px;
+    transition: 0.5s ease;
+}
+
+button:hover {
+    font-weight: bold;
+    color: white;
+    background-color: black;
+}
+
+.showCommentModal img {
+    width: 15px;
+    height: 15px;
+}
+
+.showCommentModal button {
+    border: none;
+}
+
+.subClaimCard {
+    background-color: rgb(255, 255, 255);
+    border: 1px rgb(189, 182, 182) solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
+    padding: 5px;
+    margin: 3px;
+    transition: 0.1s ease;
+}
+
+.eachSubClaim {
+    background-color: rgb(255, 255, 255);
+    border: 1px rgb(189, 182, 182) solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.303);
+    padding: 5px;
+    margin: 3px;
     transition: 0.1s ease;
 }

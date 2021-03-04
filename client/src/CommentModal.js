@@ -45,16 +45,17 @@ export default function CommentModal({ id }) {
                                     src={comment.profile_pic_url || "/default.png"}
                                 /> */}
                                 <p>
+                                    <br></br>
+                                    <br></br>
                                     {new Intl.DateTimeFormat("en-GB", {
                                         dateStyle: "short",
                                         timeStyle: "short",
-                                    }).format(new Date(comment.createdAt))}
-                                    <br></br>
-                                    <br></br>
+                                    }).format(new Date(comment.createdAt))}{" "}
                                     &apos;
                                     <strong>
-                                        {comment.commentText}&apos;{" "} {comment.first} {comment.last}
+                                        {comment.commentText}&apos;{" "}
                                     </strong>
+                                    by {comment.first} {comment.last}
                                 </p>
                             </div>
                         ))}

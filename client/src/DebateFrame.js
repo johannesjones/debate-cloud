@@ -65,11 +65,8 @@ export default function DebateFrame(props) {
 
     return (
         <div className="debateFrameDiv">
-            <div className="claimDiv">
-                <p>
-                    This is the main claim:{" "}
-                    {headerClaim ? headerClaim.text : mainClaim}
-                </p>
+            <div className="mainClaimDiv">
+                <h1>{headerClaim ? headerClaim.text : mainClaim}</h1>
             </div>
             <div className="buttonsDiv">
                 <div className="proButtonDiv">
@@ -79,90 +76,116 @@ export default function DebateFrame(props) {
                     <ConClaimButtonComp id={id} />
                 </div>
             </div>
-            <div className="allProClaims">
-                <h2>All Pro Claims</h2>
-                {proSubClaims &&
-                    proSubClaims.map((elem) => {
-                        return (
-                            <div key={elem._id}>
-                                <Link to={`/debate/${elem._id}`}>
-                                    {elem.text}
-                                </Link>
-                                <button
-                                    onClick={() => setshowProCommentModal(true)}
-                                >
-                                    Comment
-                                </button>
-                                <button
-                                    onClick={() =>
-                                        setshowProCommentModal(false)
-                                    }
-                                >
-                                    X
-                                </button>
-                                {showProCommentModal && (
-                                    <CommentModal
-                                        id={elem._id}
-                                        comments={elem.comments}
-                                    />
-                                )}
-                                <button
-                                    onClick={() => setshowRatingModal(true)}
-                                >
-                                    Rate
-                                </button>
-                                <button
-                                    onClick={() => setshowRatingModal(false)}
-                                >
-                                    X
-                                </button>
-                                {showRatingModal && (
-                                    <RatingModal id={elem._id} />
-                                )}
-                            </div>
-                        );
-                    })}
-            </div>
-            <div className="allConClaims">
-                <h2>All Con Claims</h2>
-                {conSubClaims &&
-                    conSubClaims.map((elem) => {
-                        return (
-                            <div key={elem._id}>
-                                <Link to={`/debate/${elem._id}`}>
-                                    {elem.text}
-                                </Link>
-                                <button
-                                    onClick={() => setshowConCommentModal(true)}
-                                >
-                                    Comment
-                                </button>
-                                <button
-                                    onClick={() =>
-                                        setshowConCommentModal(false)
-                                    }
-                                >
-                                    X
-                                </button>
-                                {showConCommentModal && (
-                                    <CommentModal id={elem._id} />
-                                )}
-                                <button
-                                    onClick={() => setshowRatingModal(true)}
-                                >
-                                    Rate
-                                </button>
-                                <button
-                                    onClick={() => setshowRatingModal(false)}
-                                >
-                                    X
-                                </button>
-                                {showRatingModal && (
-                                    <RatingModal id={elem._id} />
-                                )}
-                            </div>
-                        );
-                    })}
+            <div className="allSubClaims">
+                <div className="allProClaims">
+                    <h2>All Pro Claims</h2>
+                    {proSubClaims &&
+                        proSubClaims.map((elem) => {
+                            return (
+                                <div key={elem._id} className="subClaimCard">
+                                    <Link to={`/debate/${elem._id}`}>
+                                        <button className="eachSubClaim">
+                                            {elem.text}
+                                        </button>
+                                    </Link>
+                                    <div className="showCommentModal">
+                                        <button
+                                            onClick={() =>
+                                                setshowProCommentModal(true)
+                                            }
+                                            type="submit"
+                                        >
+                                            <img
+                                                src="/showCommentModal.png"
+                                                alt="submit"
+                                            />
+                                        </button>
+                                    </div>
+                                    <button
+                                        onClick={() =>
+                                            setshowProCommentModal(false)
+                                        }
+                                        type="submit"
+                                    >
+                                        X
+                                    </button>
+                                    {showProCommentModal && (
+                                        <CommentModal
+                                            id={elem._id}
+                                            comments={elem.comments}
+                                        />
+                                    )}
+                                    <button
+                                        onClick={() => setshowRatingModal(true)}
+                                        type="submit"
+                                    >
+                                        Rate
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setshowRatingModal(false)
+                                        }
+                                        type="submit"
+                                    >
+                                        X
+                                    </button>
+                                    {showRatingModal && (
+                                        <RatingModal id={elem._id} />
+                                    )}
+                                </div>
+                            );
+                        })}
+                </div>
+                <div className="allConClaims">
+                    <h2>All Con Claims</h2>
+                    {conSubClaims &&
+                        conSubClaims.map((elem) => {
+                            return (
+                                <div key={elem._id}>
+                                    <Link to={`/debate/${elem._id}`}>
+                                        {elem.text}
+                                    </Link>
+                                    <button
+                                        onClick={() =>
+                                            setshowConCommentModal(true)
+                                        }
+                                        className="showCommentModal"
+                                        type="submit"
+                                    >
+                                        Comment
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setshowConCommentModal(false)
+                                        }
+                                        type="submit"
+                                    >
+                                        X
+                                    </button>
+                                    {showConCommentModal && (
+                                        <CommentModal id={elem._id} />
+                                    )}
+                                    <button
+                                        onClick={() => setshowRatingModal(true)}
+                                        type="submit"
+                                    >
+                                        Rate
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setshowRatingModal(false)
+                                        }
+                                        type="submit"
+                                    >
+                                        X
+                                    </button>
+                                    {showRatingModal && (
+                                        <RatingModal id={elem._id} />
+                                    )}
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
         </div>
     );
