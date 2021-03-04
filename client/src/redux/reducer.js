@@ -13,7 +13,7 @@ export function reducer(state = {}, action) {
         //console.log("NEW STATE IN CHANGE_LOGIN_STATUS:", state);
     }
 
-    if (action.type === "CHANGE_MAKECLAIM_STATUS") {
+    if (action.type === "CHANGE_PRO_MAKECLAIM_STATUS") {
         //update the state object...
         //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
         //good array method for unfriend. FILTER method
@@ -21,10 +21,24 @@ export function reducer(state = {}, action) {
 
         state = {
             ...state,
-            showMakeClaim: action.payload,
+            showProMakeClaim: action.payload,
         };
 
-        console.log("NEW STATE IN CHANGE_LOGIN_STATUS:", state);
+        console.log("NEW STATE IN CHANGE_PRO_MAKECLAIM_STATUS:", state);
+    }
+
+    if (action.type === "CHANGE_CON_MAKECLAIM_STATUS") {
+        //update the state object...
+        //spread operator, slice, filter, map are ways to COPY the object/array without mutating it
+        //good array method for unfriend. FILTER method
+        //good array method for accept: MAP method
+
+        state = {
+            ...state,
+            showConMakeClaim: action.payload,
+        };
+
+        console.log("NEW STATE IN CHANGE_CON_MAKECLAIM_STATUS:", state);
     }
 
     if (action.type === "RECEIVE_ALL_MAINCLAIMS") {

@@ -4,7 +4,8 @@ import axios from "../Axios";
 import { useHistory } from "react-router-dom";
 import {
     receiveAllSubClaims,
-    showMakeClaim,
+    showProMakeClaim,
+    showConMakeClaim,
     loginStatus,
 } from "../redux/actions";
 
@@ -40,7 +41,8 @@ export default function useHandleSubmit(serverRoute, values, id, type) {
                         } else if (!data.error && data.type) {
                             console.log("WE STAY ON THIS PAGE!!!");
                             dispatch(receiveAllSubClaims(id));
-                            dispatch(showMakeClaim(false));
+                            dispatch(showProMakeClaim(false));
+                            dispatch(showConMakeClaim(false));
                             history.push(`/debate/${data.parentClaimId}`);
                         } else {
                             setError({
